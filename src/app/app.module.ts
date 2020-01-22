@@ -5,11 +5,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
+import { LoginComponent } from './components/loginWindow/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartScreenComponent
+    StartScreenComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
