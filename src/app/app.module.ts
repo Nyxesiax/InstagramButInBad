@@ -6,6 +6,19 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'startScreen',
+    component: StartScreenComponent},
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  { path: '',
+    component: StartScreenComponent},//,
+  //{ path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   declarations: [
@@ -14,6 +27,9 @@ import { LoginComponent } from './components/loginWindow/login.component';
     LoginComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true }),
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -21,4 +37,5 @@ import { LoginComponent } from './components/loginWindow/login.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
