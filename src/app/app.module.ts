@@ -24,7 +24,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     StartScreenComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     RouterModule.forRoot(
