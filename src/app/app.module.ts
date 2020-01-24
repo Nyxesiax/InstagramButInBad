@@ -7,10 +7,14 @@ import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 
 const appRoutes: Routes = [
   { path: 'startScreen',
     component: StartScreenComponent},
+  { path: 'dashboard',
+    component: DashboardComponent},
   {
     path: 'login',
     component: LoginComponent,
