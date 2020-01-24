@@ -8,6 +8,9 @@ import { StartScreenComponent } from './components/start-screen/start-screen.com
 import { LoginComponent } from './components/loginWindow/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PicturesService } from './Service/pictures.service';
+import { DataserviceService } from './Service/dataservice.service';
+
 
 
 const appRoutes: Routes = [
@@ -39,7 +42,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [PicturesService, DataserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

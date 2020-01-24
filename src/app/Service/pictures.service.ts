@@ -9,12 +9,16 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 })
 export class PicturesService {
 
-  pictures: Observable<Pictures[]>;
+  _pictures: Observable<Pictures[]>;
 
   constructor(private af: AngularFirestore) {  }
 
   getUrl() {
     const pictures = this.af.collection('URL').valueChanges();
-    this.pictures = pictures as Observable<Pictures[]>;
+    this._pictures = pictures as Observable<Pictures[]>;
+  }
+
+  pictures() {
+    return this._pictures;
   }
 }

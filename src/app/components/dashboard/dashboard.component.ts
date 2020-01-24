@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PicturesService } from 'src/app/Service/pictures.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private picturesService: PicturesService) { }
 
   ngOnInit() {
   }
 
+  get URL() {
+    return this.picturesService.pictures();
+  }
 }
