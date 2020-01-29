@@ -1,9 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AngularFireModule } from '@angular/fire/firebase.app.module';
-import { AngularFirestoreModule } from '@angular/fire/firestore/firestore.module';
-import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,19 +8,29 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PicturesService } from './Service/pictures.service';
 import { DataserviceService } from './Service/dataservice.service';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 
 
 const appRoutes: Routes = [
-  { path: 'startScreen',
-    component: StartScreenComponent},
-  { path: 'dashboard',
-    component: DashboardComponent},
+  {
+    path: 'startScreen',
+    component: StartScreenComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
   {
     path: 'login',
     component: LoginComponent,
   },
-  { path: '',
-    component: StartScreenComponent},//,
+  {
+    path: '',
+    component: StartScreenComponent
+  },//,
   //{ path: '**', component: PageNotFoundComponent }
 ];
 
@@ -41,6 +48,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence()
   ],
   providers: [PicturesService, DataserviceService],
   bootstrap: [AppComponent]

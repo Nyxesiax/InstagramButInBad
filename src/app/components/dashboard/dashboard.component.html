@@ -1,3 +1,5 @@
-<ul style="list-style-type:none" *ngFor="let pictures of pictures | async" >
-
+<ul style="list-style-type:none">
+  <li *ngFor="let pic of pictures | async">
+    <img [src]="pic.URL">
+  </li>
 </ul>

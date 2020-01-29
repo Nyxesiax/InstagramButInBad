@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  get URL() {
-    return this.picturesService.pictures();
+  get pictures() {
+    return this.picturesService.pictures;
   }
 }
