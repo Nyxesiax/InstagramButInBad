@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/firebase.app.module';
+import { AngularFirestoreModule } from '@angular/fire/firestore/firestore.module';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     StartScreenComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -33,6 +36,8 @@ const appRoutes: Routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

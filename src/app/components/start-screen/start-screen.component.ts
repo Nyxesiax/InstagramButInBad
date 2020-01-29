@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Users} from '../../modules/users';
+import {UsersService} from '../../Service/users.service';
 
 @Component({
   selector: 'app-start-screen',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartScreenComponent implements OnInit {
 
-  constructor() { }
+  constructor(public service: UsersService) { }
+
+  public email: string;
+  public password: string;
+  public username: string;
+
+  get getUsers(): any {
+    return this.service.users;
+  }
 
   ngOnInit() {
+  }
+
+  del(user: Users) {
+    this.service.del(user);
+  }
+
+  async save() {
+    if (! await this.service.save(this.email, this.password, this.username)) {
+      alert('Wow, das geht nicht');
+    }
   }
 
 }
