@@ -1,6 +1,6 @@
 export class Pictures {
 
 
-  constructor(public id: string, public URL: string) {
+  constructor(public date: Date, public id: string, public URL: string) {
   }
 }

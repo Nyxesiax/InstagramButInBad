@@ -9,10 +9,20 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 })
 export class PicturesService {
 
-  pictures: Observable<Pictures[]>;
+  // Picture Array Observable
+  private picArray: Observable<Pictures[]>;
 
   constructor(private af: AngularFirestore) {
-    this.pictures = this.af.collection('Pictures').valueChanges() as Observable<Pictures[]>;
+    // Bilder aus Firebase laden, nach timestamp DESC sortieren und in picArray speichern
+    let pics = this.af.collection('Pictures', ref => {
+      return ref.orderBy('timestamp', 'desc');
+    }).valueChanges({ idField: 'id' });
+    this.picArray = pics as Observable<Pictures[]>;
+  }
+
+  // PicArray ausgeben
+  pictures() {
+    return this.picArray;
   }
 
 }
