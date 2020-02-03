@@ -11,6 +11,8 @@ import { DataserviceService } from './Service/dataservice.service';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { UploadImageComponent } from './components/upload-image/upload-image.component';
 
 
 
@@ -18,6 +20,10 @@ const appRoutes: Routes = [
   {
     path: 'startScreen',
     component: StartScreenComponent
+  },
+  {
+    path: 'uploadImage',
+    component: UploadImageComponent
   },
   {
     path: 'dashboard',
@@ -39,7 +45,9 @@ const appRoutes: Routes = [
     AppComponent,
     StartScreenComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent,
+    UploadImageComponent
   ],
   imports: [
     RouterModule.forRoot(
