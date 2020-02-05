@@ -1,18 +1,21 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import {Users} from '../modules/users';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {auth} from 'firebase';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UsersService {
   users: Observable<any>;
-  constructor(private httpClient: HttpClient, private af: AngularFirestore) {
+  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
     this.users = af.collection('Users').valueChanges({idField: 'id'});
   }
-
   get getUsers() {
     return this.users;
   }
@@ -32,5 +35,31 @@ export class UsersService {
     } catch (e) {
       return false;
     }
+  }
+
+  // Sign in with Google
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider());
+  }
+
+  // Auth logic to run auth providers
+  AuthLogin(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((result) => {
+        console.log('You have been successfully logged in!' + JSON.stringify(result));
+        const username = result.user.displayName;
+        const email = result.user.email;
+        this.save(email, '', username);
+        // this.router.navigateByUrl('');
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
+
+  SignOut() {
+    return this.afAuth.auth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigateByUrl('');
+    });
   }
 }

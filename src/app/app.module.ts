@@ -12,6 +12,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
 
+
 const appRoutes: Routes = [
   { path: 'startScreen',
     component: StartScreenComponent},
@@ -20,8 +21,10 @@ const appRoutes: Routes = [
     component: LoginComponent,
   },
   { path: '',
-    component: StartScreenComponent}, // ,
-  // { path: '**', component: PageNotFoundComponent }
+
+    component: StartScreenComponent} // ,
+  //{ path: '**', component: PageNotFoundComponent }
+
 ];
 
 @NgModule({
@@ -38,6 +41,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     FormsModule,
     HttpClientModule,
     AngularFireAuthModule

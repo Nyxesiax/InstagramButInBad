@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../Service/authentication.service';
+import {UsersService} from '../../Service/users.service';
+
 
 
 @Component({
@@ -7,6 +9,7 @@ import {AuthenticationService} from '../../Service/authentication.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 
 export class LoginComponent  {
 
@@ -24,6 +27,7 @@ export class LoginComponent  {
     this.email = '';
     this.password = '';
   }
+
 
   signOut() {
     this.authenticationService.SignOut();
