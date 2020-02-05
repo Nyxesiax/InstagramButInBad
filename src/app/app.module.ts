@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireAuthModule} from "@angular/fire/auth";
 
 const appRoutes: Routes = [
   { path: 'startScreen',
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     FormsModule,
     HttpClientModule,
   ],
