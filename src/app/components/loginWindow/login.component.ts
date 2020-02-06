@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../Service/authentication.service';
 import {UsersService} from '../../Service/users.service';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,9 +11,7 @@ import {UsersService} from '../../Service/users.service';
 
 export class LoginComponent  {
 
-  constructor(
-    private authenticationService: AuthenticationService
-  ) {
+  constructor(private authenticationService: AuthenticationService, public userService: UsersService) {
   }
 
   email: string;
