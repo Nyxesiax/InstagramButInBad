@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
@@ -9,8 +10,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireAuthModule} from "@angular/fire/auth";
+import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
+
 
 const appRoutes: Routes = [
   { path: 'startScreen',
@@ -20,8 +21,10 @@ const appRoutes: Routes = [
     component: LoginComponent,
   },
   { path: '',
+
     component: StartScreenComponent} // ,
   //{ path: '**', component: PageNotFoundComponent }
+
 ];
 
 @NgModule({
@@ -41,6 +44,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     FormsModule,
     HttpClientModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
