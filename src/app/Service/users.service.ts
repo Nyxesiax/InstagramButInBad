@@ -31,7 +31,7 @@ export class UsersService {
         'password': password,
         'username': username
       });
-      this.router.navigate(['/login']);
+      await this.router.navigate(['/login']);
       return true;
     } catch (e) {
       return false;
@@ -50,7 +50,7 @@ export class UsersService {
         console.log('You have been successfully logged in!' + JSON.stringify(result));
         const username = result.user.displayName;
         const email = result.user.email;
-        // this.router.navigateByUrl('');
+        this.router.navigateByUrl('/dashBoard');
       }).catch((error) => {
         console.log(error);
       });
