@@ -3,6 +3,7 @@ import { PicturesService } from 'src/app/Service/pictures.service';
 import {UsersService} from '../../Service/users.service';
 import {PostService} from '../../Service/post.service';
 import {LoginComponent} from '../loginWindow/login.component';
+import {Pictures} from '../../models/pictures';
 
 
 @Component({
@@ -23,7 +24,6 @@ export class DashboardComponent implements OnInit {
   get pictures() {
     return this.picturesService.pictures();
   }
-  
   async like() {
     await this.picturesService.like();
   }
@@ -36,8 +36,8 @@ export class DashboardComponent implements OnInit {
   async likesDown(pic: Pictures) {
     pic.likes--;
     await this.picturesService.updatePicture(pic);
-
-  getEmail() {
+  }
+    getEmail() {
     return this.loginComponent.email;
   }
   manageComment() {
