@@ -1,0 +1,17 @@
+
+div#uploadzone{
+  background-color: lightgrey;
+  padding: 250px 0;
+  border: 2px solid black;
+  text-align: center;
+  width: 100%;
+}
+
+label{
+  font-size: x-large;
+  font-weight:bold;
+}
+
+input{
+  font-size: large;
+}
