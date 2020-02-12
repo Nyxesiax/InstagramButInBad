@@ -17,8 +17,7 @@
              [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
 
       <button (click)="signIn()" class="btn btn-default" style="margin-left:5px;">Login</button>
-      <button (click)="signOut()" class="btn btn-primary" *ngIf="authenticationService.userData | async">Logout</button>
-    </div>
+      </div>
 
     <br>
     <a routerLink="/startScreen" routerLinkActive="active">Don't have an account? Register now!</a>
