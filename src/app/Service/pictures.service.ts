@@ -25,4 +25,19 @@ export class PicturesService {
     return this.picArray;
   }
 
+  async like(): Promise<boolean> {
+    try {
+      this.af.collection('Pictures').valueChanges({likes: 'likes'});
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async updatePicture(pic: Pictures) {
+    this.af.collection('Pictures').doc(pic.id).update({
+      URL: pic.URL,
+      likes: pic.likes
+    });
+  }
 }
