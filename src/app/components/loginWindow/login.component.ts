@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../Service/authentication.service';
 import {UsersService} from '../../Service/users.service';
+import {CommentsService} from "../../Service/comments.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
 
 export class LoginComponent  {
 
@@ -16,17 +16,13 @@ export class LoginComponent  {
 
   email: string;
   password: string;
-
-
   signIn() {
     this.authenticationService.SignIn(this.email, this.password);
     this.email = '';
     this.password = '';
   }
 
-
   signOut() {
-    this.authenticationService.SignOut();
+    this.userService.SignOut();
   }
-
 }
