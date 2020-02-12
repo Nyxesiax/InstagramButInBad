@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
 import { Pictures } from 'src/app/models/pictures';
+import {UsersService} from '../../Service/users.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,7 @@ import { Pictures } from 'src/app/models/pictures';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private picturesService: PicturesService) {
+  constructor(private picturesService: PicturesService, public userService: UsersService) {
   }
 
   ngOnInit() {

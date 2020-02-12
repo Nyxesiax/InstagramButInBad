@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import {UsersService} from './users.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataserviceService {
 
-  constructor() { }
+  constructor(public userService: UsersService) { }
 }
