@@ -9,26 +9,23 @@ import {AuthenticationService} from "../../Service/authentication.service";
   styleUrls: ['./start-screen.component.css']
 })
 export class StartScreenComponent implements OnInit {
+  constructor(
+    private authenticationService:AuthenticationService
+  ) {
+  }
 
-  constructor(public service: UsersService, public authService: AuthenticationService) { }
+  email: string;
+  password: string;
 
-  public email: string;
-  public password: string;
-  public username: string;
-
-  get getUsers(): any {
-    return this.service.users;
+  signUp() {
+    this.authenticationService.SignUp(this.email, this.password);
+    this.email = '';
+    this.password = '';
   }
 
   ngOnInit() {
   }
 
-  del(user: Users) {
-    this.service.del(user);
-  }
 
-  signUp() {
-    this.authService.SignUp(this.email, this.password);
-  }
 
 }
