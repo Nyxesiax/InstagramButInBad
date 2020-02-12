@@ -23,6 +23,20 @@ export class DashboardComponent implements OnInit {
   get pictures() {
     return this.picturesService.pictures();
   }
+  
+  async like() {
+    await this.picturesService.like();
+  }
+
+  async likesUp(pic: Pictures) {
+    pic.likes++;
+    await this.picturesService.updatePicture(pic);
+  }
+
+  async likesDown(pic: Pictures) {
+    pic.likes--;
+    await this.picturesService.updatePicture(pic);
+
   getEmail() {
     return this.loginComponent.email;
   }
