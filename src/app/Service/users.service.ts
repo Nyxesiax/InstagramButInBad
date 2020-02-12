@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {Users} from '../modules/users';
-import {HttpClient} from '@angular/common/http';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
-import {auth} from 'firebase';
-import {Router} from '@angular/router';
+import { Users } from '../models/users';
+import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { auth } from 'firebase';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 export class UsersService {
   users: Observable<any>;
   constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
-    this.users = af.collection('Users').valueChanges({idField: 'id'});
+    this.users = af.collection('Users').valueChanges({ idField: 'id' });
   }
   get getUsers() {
     return this.users;

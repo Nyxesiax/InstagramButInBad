@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Users} from '../../modules/users';
-import {UsersService} from '../../Service/users.service';
+import { Users } from '../../models/users';
+import { UsersService } from '../../Service/users.service';
 
 @Component({
   selector: 'app-start-screen',
