@@ -1,6 +1,11 @@
-
-<ul style="list-style-type:none">
-  <li><img src="https://firebasestorage.googleapis.com/v0/b/instagram-but-in-bad.appspot.com/o/639sTgNU_400x400.jpg?alt=media&token=2535914d-e21d-4d6a-b2c5-67c6d7b883d6"></li>
-  <li><img src="https://firebasestorage.googleapis.com/v0/b/instagram-but-in-bad.appspot.com/o/639sTgNU_400x400.jpg?alt=media&token=2535914d-e21d-4d6a-b2c5-67c6d7b883d6"></li>
-  <li><img src="https://firebasestorage.googleapis.com/v0/b/instagram-but-in-bad.appspot.com/o/639sTgNU_400x400.jpg?alt=media&token=2535914d-e21d-4d6a-b2c5-67c6d7b883d6"></li>
-</ul>
+<body>
+    <ul style="list-style-type:none">
+      <!-- PicArray ASYNC durchgehen weil observable -->
+      <li *ngFor="let pic of pictures | async; let i = index">
+        <img [src]="pic.URL">
+        <!-- <p>Uploaded: {{pic.date | date:'short':'+0100' }}</p> -->
+        <!-- https://www.angularjswiki.com/angular/angular-date-pipe-formatting-date-times-in-angular-with-examples/ -->
+      </li>
+      </ul>
+  <button type="submit" class="btn btn-primary" (click)="userService.SignOut()">Sign out</button>
+</body>

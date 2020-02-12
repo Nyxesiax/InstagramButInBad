@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PicturesService } from 'src/app/Service/pictures.service';
+import { Pictures } from 'src/app/models/pictures';
+import {UsersService} from '../../Service/users.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private picturesService: PicturesService, public userService: UsersService) {
+  }
 
   ngOnInit() {
   }
 
+  // PicArray aus Service für HTML als fake property bereitstellen
+  get pictures() {
+
+    return this.picturesService.pictures();
+  }
 }

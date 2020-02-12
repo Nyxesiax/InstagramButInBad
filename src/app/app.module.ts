@@ -8,23 +8,42 @@ import { LoginComponent } from './components/loginWindow/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PicturesService } from './Service/pictures.service';
+import { DataserviceService } from './Service/dataservice.service';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
 
 
+
 const appRoutes: Routes = [
-  { path: 'startScreen',
-    component: StartScreenComponent},
+  {
+    path: 'startScreen',
+    component: StartScreenComponent
+  },
+  {
+    path: 'uploadImage',
+    component: UploadImageComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
   {
     path: 'login',
     component: LoginComponent,
   },
+  {
+    path: 'dashBoard',
+    component: DashboardComponent},
   { path: '',
-
     component: StartScreenComponent} // ,
-  //{ path: '**', component: PageNotFoundComponent }
-
+  // { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -32,7 +51,9 @@ const appRoutes: Routes = [
     AppComponent,
     StartScreenComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent,
+    UploadImageComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -41,12 +62,12 @@ const appRoutes: Routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     FormsModule,
-    HttpClientModule,
-    AngularFireAuthModule
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PicturesService, DataserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
