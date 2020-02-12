@@ -14,7 +14,7 @@ export class PicturesService {
 
   constructor(private af: AngularFirestore) {
     // Bilder aus Firebase laden, nach timestamp DESC sortieren und in picArray speichern
-    let pics = this.af.collection('Pictures', ref => {
+    const pics = this.af.collection('Pictures', ref => {
       return ref.orderBy('timestamp', 'desc');
     }).valueChanges({ idField: 'id' });
     this.picArray = pics as Observable<Pictures[]>;
