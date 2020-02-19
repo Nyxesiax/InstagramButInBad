@@ -13,8 +13,8 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
-AuthModule} from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
 
 const appRoutes: Routes = [
   {

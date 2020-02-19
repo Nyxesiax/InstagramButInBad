@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
 import {UsersService} from '../../Service/users.service';
 import {PostService} from '../../Service/post.service';
-import {LoginComponent} from '../loginWindow/login.component';
 import {Pictures} from '../../models/pictures';
 
 
