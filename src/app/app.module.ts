@@ -33,9 +33,6 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: 'dashBoard',
-    component: DashboardComponent},
   { path: '',
     component: StartScreenComponent} // ,
   // { path: '**', component: PageNotFoundComponent }
