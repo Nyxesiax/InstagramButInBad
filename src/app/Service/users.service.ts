@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Users } from '../models/users';
-import { HttpClient } from '@angular/common/http';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { auth } from 'firebase';
-import { Router } from '@angular/router';
+import {Users} from '../modules/users';
+import {HttpClient} from '@angular/common/http';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {auth} from 'firebase';
+import {Router} from '@angular/router';
+import {User} from '../modules/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 
 export class UsersService {
   users: Observable<any>;
+  currentUser: User;
   constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
     this.users = af.collection('Users').valueChanges({ idField: 'id' });
   }
@@ -31,7 +33,7 @@ export class UsersService {
         'password': password,
         'username': username
       });
-      this.router.navigate(['/login']);
+      await this.router.navigate(['/login']);
       return true;
     } catch (e) {
       return false;
@@ -50,7 +52,9 @@ export class UsersService {
         console.log('You have been successfully logged in!' + JSON.stringify(result));
         const username = result.user.displayName;
         const email = result.user.email;
-        // this.router.navigateByUrl('');
+        this.currentUser = result.user;
+
+        this.router.navigateByUrl('/dashboard');
       }).catch((error) => {
         console.log(error);
       });

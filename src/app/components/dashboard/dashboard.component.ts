@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
-import { Pictures } from 'src/app/models/pictures';
 import {UsersService} from '../../Service/users.service';
+import {PostService} from '../../Service/post.service';
+import {LoginComponent} from '../loginWindow/login.component';
+import {Pictures} from '../../models/pictures';
 
 
 @Component({
@@ -11,15 +13,34 @@ import {UsersService} from '../../Service/users.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private picturesService: PicturesService, public userService: UsersService) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private picturesService: PicturesService, public userService: UsersService, public postService: PostService) {
   }
-
+  public picComment: string;
   ngOnInit() {
   }
 
   // PicArray aus Service für HTML als fake property bereitstellen
   get pictures() {
-
     return this.picturesService.pictures();
+  }
+  async like() {
+    await this.picturesService.like();
+  }
+
+  async likesUp(pic: Pictures) {
+    pic.likes++;
+    await this.picturesService.updatePicture(pic);
+  }
+
+  async likesDown(pic: Pictures) {
+    pic.likes--;
+    await this.picturesService.updatePicture(pic);
+  }
+    get currentUser() {
+    return this.userService.currentUser;
+  }
+  manageComment() {
+    this.postService.manageComments(this.currentUser.email, this.picComment);
   }
 }

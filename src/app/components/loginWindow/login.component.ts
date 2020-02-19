@@ -8,7 +8,6 @@ import {UsersService} from '../../Service/users.service';
   styleUrls: ['./login.component.css']
 })
 
-
 export class LoginComponent  {
 
   constructor(private authenticationService: AuthenticationService, public userService: UsersService) {
@@ -16,17 +15,17 @@ export class LoginComponent  {
 
   email: string;
   password: string;
-
-
   signIn() {
     this.authenticationService.SignIn(this.email, this.password);
     this.email = '';
     this.password = '';
   }
 
-
   signOut() {
-    this.authenticationService.SignOut();
+    this.userService.SignOut();
   }
 
+  googleAuth() {
+    return this.userService.GoogleAuth();
+  }
 }

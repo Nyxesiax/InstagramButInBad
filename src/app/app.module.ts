@@ -9,14 +9,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PicturesService } from './Service/pictures.service';
 import { DataserviceService } from './Service/dataservice.service';
-import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
-
-
+AuthModule} from '@angular/fire/auth';
 
 const appRoutes: Routes = [
   {
@@ -35,12 +33,9 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: '',
-    component: StartScreenComponent
-  } // ,
-  //{ path: '**', component: PageNotFoundComponent }
-
+  { path: '',
+    component: StartScreenComponent} // ,
+  // { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
