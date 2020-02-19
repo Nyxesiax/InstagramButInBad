@@ -16,7 +16,7 @@ export class UsersService {
   users: Observable<any>;
   currentUser: User;
   constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
-    this.users = af.collection('Users').valueChanges({idField: 'id'});
+    this.users = af.collection('Users').valueChanges({ idField: 'id' });
   }
   get getUsers() {
     return this.users;

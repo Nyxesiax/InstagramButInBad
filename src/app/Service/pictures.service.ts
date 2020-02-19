@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreModule } from '@angular/fire/firestore/firestore.module';
 import { Observable } from 'rxjs';
 import { Pictures } from '../models/pictures';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { UploadImage } from '../models/upload-image';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,15 @@ export class PicturesService {
   // PicArray ausgeben
   pictures() {
     return this.picArray;
+  }
+
+  upload(uI: UploadImage) {
+    this.af.collection('Pictures').add({
+      Tags: uI.tags, URL: uI.url, description: uI.description, likes: uI.likes, timestamp: uI.timestamp
+    })
+      .then(docRef => {
+        console.log('Document written with ID: ', docRef.id);
+      });
   }
 
   async like(): Promise<boolean> {
