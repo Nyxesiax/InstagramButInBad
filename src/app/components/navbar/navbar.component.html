@@ -20,7 +20,15 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <label>
+        <input (keydown)="search($event)" [(ngModel)]="searchterm" type="text">
+      </label>
+      <ul *ngFor="let username of usernames">
+        <li>{{username.username}}</li>
+      </ul>
+      <div *ngIf="username?.length < 1">
+        <p>Sorry, no user found</p>
+      </div>
       <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
       <button type="button" class="btn btn-light">Search</button>
     </form>

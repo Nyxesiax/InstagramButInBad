@@ -60,7 +60,10 @@ const appRoutes: Routes = [
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence()
   ],
   providers: [PicturesService, DataserviceService],
   bootstrap: [AppComponent]
