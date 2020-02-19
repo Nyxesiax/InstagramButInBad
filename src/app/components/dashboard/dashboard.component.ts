@@ -14,7 +14,7 @@ import {Pictures} from '../../models/pictures';
 export class DashboardComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private picturesService: PicturesService, public userService: UsersService, public postService: PostService, public loginComponent: LoginComponent) {
+  constructor(private picturesService: PicturesService, public userService: UsersService, public postService: PostService) {
   }
   public picComment: string;
   ngOnInit() {
@@ -37,10 +37,10 @@ export class DashboardComponent implements OnInit {
     pic.likes--;
     await this.picturesService.updatePicture(pic);
   }
-    getEmail() {
-    return this.loginComponent.email;
+    get currentUser() {
+    return this.userService.currentUser;
   }
   manageComment() {
-    this.postService.manageComments(this.getEmail(), this.picComment);
+    this.postService.manageComments(this.currentUser.email, this.picComment);
   }
 }
