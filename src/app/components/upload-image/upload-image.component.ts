@@ -47,14 +47,14 @@ export class UploadImageComponent implements OnInit {
   upload() {
 
     // Objekt für Upload erstellen
-    const img = new UploadImage('');
+    const img = new UploadImage();
 
     // Objekt mit Daten füllen
     img.tags = this.tags;
     img.url = this.base64textString;
     img.description = this.description;
     img.likes = 0;
-    img.timestamp = '';
+    img.timestamp = new Date(Date.now());
 
     // Save in Firestore
     this.pictureservice.upload(img);

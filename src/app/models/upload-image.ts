@@ -6,7 +6,7 @@ export class UploadImage {
     public url?: string,
     public description?: string,
     public likes?: number,
-    public timestamp?: string
+    public timestamp?: Date
   ) {
 
   }
