@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Users } from '../../models/users';
-import { UsersService } from '../../Service/users.service';
+import {Users} from '../../modules/users';
+import {UsersService} from '../../Service/users.service';
+import {AuthenticationService} from '../../Service/authentication.service';
 
 @Component({
   selector: 'app-start-screen',
@@ -9,7 +10,7 @@ import { UsersService } from '../../Service/users.service';
 })
 export class StartScreenComponent implements OnInit {
 
-  constructor(public service: UsersService) { }
+  constructor(public service: UsersService, public authService: AuthenticationService) { }
 
   public email: string;
   public password: string;
@@ -26,10 +27,7 @@ export class StartScreenComponent implements OnInit {
     this.service.del(user);
   }
 
-  async save() {
-    if (! await this.service.save(this.email, this.password, this.username)) {
-      alert('Wow, das geht nicht');
-    }
+  signUp() {
+    this.authService.SignUp(this.email, this.password);
   }
-
 }
