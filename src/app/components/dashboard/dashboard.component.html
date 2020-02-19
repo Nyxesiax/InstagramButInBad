@@ -3,7 +3,7 @@
     <ul style="list-style-type:none">
       <!-- PicArray ASYNC durchgehen weil observable -->
       <li *ngFor="let pic of pictures | async; let i = index">
-        <img [src]="pic.URL">
+        <img [src]="pic.URL" (click)="showDetails(pic)">
         <button type="submit" class="btn btn-success" (click)="likesUp(pic)"> Like </button>
         <button type="submit" class="btn btn-danger" (click)="likesDown(pic)"> Dislike </button>
         <div> <b> Likes: {{pic.likes}} </b> </div>

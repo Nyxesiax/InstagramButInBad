@@ -11,6 +11,7 @@ export class PicturesService {
 
   // Picture Array Observable
   private picArray: Observable<Pictures[]>;
+  private singlePicArray: Observable<Pictures[]>;
 
   constructor(private af: AngularFirestore) {
     // Bilder aus Firebase laden, nach timestamp DESC sortieren und in picArray speichern
@@ -23,6 +24,10 @@ export class PicturesService {
   // PicArray ausgeben
   pictures() {
     return this.picArray;
+  }
+
+  singlePicByID() {
+    return this.singlePicArray;
   }
 
   async like(): Promise<boolean> {
@@ -40,4 +45,10 @@ export class PicturesService {
       likes: pic.likes
     });
   }
+
+  async showSinglePicture(pic: Pictures) {
+    const picture = this.af.collection('Pictures').doc(pic.id);
+    // this.singlePicArray = picture as Observable<Pictures[]>;
+  }
+
 }
