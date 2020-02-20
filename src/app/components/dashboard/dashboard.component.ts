@@ -36,10 +36,7 @@ export class DashboardComponent implements OnInit {
     pic.likes--;
     await this.picturesService.updatePicture(pic);
   }
-    get currentUser() {
-    return this.userService.currentUser;
-  }
   manageComment() {
-    this.postService.manageComments(this.currentUser.email, this.picComment);
+    this.postService.manageComments(this.userService.getUsers(), this.picComment);
   }
 }
