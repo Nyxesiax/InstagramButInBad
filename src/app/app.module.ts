@@ -5,7 +5,7 @@ import {AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -55,14 +55,15 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }),
+      {enableTracing: true}),
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [PicturesService, DataserviceService],
   bootstrap: [AppComponent]
