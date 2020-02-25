@@ -15,6 +15,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
+import {PostService} from "./Service/post.service";
+import {UploadService} from "./Service/upload.service";
 
 const appRoutes: Routes = [
   {
@@ -59,7 +61,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [PicturesService, DataserviceService],
+  providers: [PicturesService, DataserviceService, UploadImageComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

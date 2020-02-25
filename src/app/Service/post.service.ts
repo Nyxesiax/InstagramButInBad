@@ -3,16 +3,17 @@ import {Pictures} from '../models/pictures';
 import {PicComment} from '../models/pic.comment';
 import {Post} from '../models/post';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {UploadImageComponent} from '../components/upload-image/upload-image.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private af: AngularFirestore) { }
+  constructor(private af: AngularFirestore, private uploadData: UploadImageComponent) { }
   private commentArray: PicComment[];
   manageComments(email: string, text: string) {
-    const pic = new Pictures(null, 'urlstring', 'asd', 0);
+    const pic = new Pictures(this.uploadData.timestamp, 'urlstring', this.uploadData.url, 0);
     this.commentArray.push(new PicComment(email, text));
     const p = new Post(pic, this.commentArray);
 
