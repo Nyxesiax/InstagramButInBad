@@ -3,6 +3,7 @@ import { PicturesService } from 'src/app/Service/pictures.service';
 import {UsersService} from '../../Service/users.service';
 import {PostService} from '../../Service/post.service';
 import {Pictures} from '../../models/pictures';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,8 @@ import {Pictures} from '../../models/pictures';
 export class DashboardComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private picturesService: PicturesService, public userService: UsersService, public postService: PostService) {
+  constructor(private picturesService: PicturesService, public userService: UsersService, public postService: PostService,
+              public router: Router) {
   }
   public picComment: string;
   ngOnInit() {
@@ -38,5 +40,9 @@ export class DashboardComponent implements OnInit {
   }
   manageComment() {
     this.postService.manageComments(this.userService.getUsers(), this.picComment);
+  }
+
+  showDetails() {
+    this.router.navigateByUrl('/detailWindow');
   }
 }

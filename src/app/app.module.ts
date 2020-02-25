@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
+import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
 
 const appRoutes: Routes = [
   {
@@ -28,6 +29,10 @@ const appRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'detailWindow',
+    component: DetailWindowComponent
   },
   {
     path: 'login',
@@ -45,7 +50,8 @@ const appRoutes: Routes = [
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    DetailWindowComponent
   ],
   imports: [
     RouterModule.forRoot(
