@@ -1,15 +1,16 @@
+<h1 class="mt-5">{{currentUser}}</h1>
 <body>
     <ul style="list-style-type:none">
       <!-- PicArray ASYNC durchgehen weil observable -->
       <li *ngFor="let pic of pictures | async; let i = index">
-        <img [src]="pic.URL">
+        <img [src]="pic.URL" (click)="showDetails(pic)">
         <button type="submit" class="btn btn-success" (click)="likesUp(pic)"> Like </button>
         <button type="submit" class="btn btn-danger" (click)="likesDown(pic)"> Dislike </button>
         <div> <b> Likes: {{pic.likes}} </b> </div>
         <div>  </div>
         <input type="comment" class="form-control" id="exampleInputEmail1"
-               aria-describedby="emailHelp" placeholder="Enter comment" [(ngModel)]="comment" [ngModelOptions]="{standalone: true}">
-        <button (click)="saveComment()" class="btn btn-default" style="margin-left:5px;">comment</button>
+               aria-describedby="emailHelp" placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
+        <button (click)="manageComment()" class="btn btn-default" style="margin-left:5px;">comment</button>
         <!-- <p>Uploaded: {{pic.date | date:'short':'+0100' }}</p> -->
         <!-- https://www.angularjswiki.com/angular/angular-date-pipe-formatting-date-times-in-angular-with-examples/ -->
       </li>

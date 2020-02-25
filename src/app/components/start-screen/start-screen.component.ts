@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Users} from '../../modules/users';
 import {UsersService} from '../../Service/users.service';
 import {AuthenticationService} from '../../Service/authentication.service';
-import {CommentsService} from "../../Service/comments.service";
+import {Users} from '../../models/users';
 
 @Component({
   selector: 'app-start-screen',
@@ -11,7 +10,7 @@ import {CommentsService} from "../../Service/comments.service";
 })
 export class StartScreenComponent implements OnInit {
 
-  constructor(public service: UsersService, public authService: AuthenticationService, public foo: CommentsService) { }
+  constructor(public service: UsersService, public authService: AuthenticationService) { }
 
   public email: string;
   public password: string;
