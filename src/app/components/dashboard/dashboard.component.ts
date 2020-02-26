@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
-import {UsersService} from '../../Service/users.service';
 import {PostService} from '../../Service/post.service';
 import {Pictures} from '../../models/pictures';
+import {Router} from '@angular/router';
+import {Users} from '../../models/users';
 
 
 @Component({
@@ -13,7 +14,7 @@ import {Pictures} from '../../models/pictures';
 export class DashboardComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private picturesService: PicturesService, public userService: UsersService, public postService: PostService) {
+  constructor(private picturesService: PicturesService, public postService: PostService, public users: Users, public router: Router) {
   }
   public picComment: string;
   ngOnInit() {
@@ -36,10 +37,11 @@ export class DashboardComponent implements OnInit {
     pic.likes--;
     await this.picturesService.updatePicture(pic);
   }
-    get currentUser() {
-    return this.userService.currentUser;
-  }
   manageComment() {
-    this.postService.manageComments(this.currentUser.email, this.picComment);
+    this.postService.manageComments(this.users.username, this.picComment);
+  }
+
+  showDetails() {
+    this.router.navigateByUrl('/detailWindow');
   }
 }
