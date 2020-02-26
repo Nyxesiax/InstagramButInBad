@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
+import {Users} from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import * as firebase from 'firebase';
 export class AuthenticationService {
   userData: Observable<firebase.User>;
 
-  constructor(private angularFireAuth: AngularFireAuth, public router: Router) {
+  constructor(private angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
     this.userData = angularFireAuth.authState;
   }
 
@@ -37,6 +38,8 @@ export class AuthenticationService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(res => {
+        this.userbla.email = res.user.email;
+        alert(this.userbla.email);
         console.log('You are Successfully logged in!');
         this.router.navigateByUrl('/dashboard');
       })
@@ -45,7 +48,7 @@ export class AuthenticationService {
       });
   }
 
-  doGoogleLogin(){
+  doGoogleLogin() {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('profile');
@@ -66,7 +69,6 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
 
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-
         .then(res => {
           resolve(res);
         }, err => reject(err));
@@ -79,18 +81,27 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
         .then(res => {
+          this.userbla.email = res.user.email;
           resolve(res);
         }, err => reject(err));
     });
   }
 
-  doLogout() {
+  SignOut() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.angularFireAuth.auth.signOut();
+        this.router.navigateByUrl('');
         resolve();
       } else {
-        reject();
+        try {
+          return this.angularFireAuth.auth.signOut().then(() => {
+            localStorage.removeItem('user');
+            this.router.navigateByUrl('');
+          });
+        } catch (e) {
+          reject();
+        }
       }
     });
   }

@@ -13,13 +13,10 @@ import {Users} from '../models/users';
 
 export class UsersService {
   users: Observable<any>;
-  currentUser: string;
 
-  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public userBla: Users) {
     this.users = af.collection('Users').valueChanges({ idField: 'id' });
-  }
-  getUsers() {
-    return this.currentUser;
   }
 
   del(user: Users) {
@@ -61,17 +58,10 @@ export class UsersService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
         console.log('You have been successfully logged in!' + JSON.stringify(result));
-        this.currentUser = result.user.displayName;
+        this.userBla.email = result.user.email;
         this.router.navigateByUrl('/dashboard');
       }).catch((error) => {
         console.log(error);
       });
-  }
-
-  SignOut() {
-    return this.afAuth.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigateByUrl('');
-    });
   }
 }

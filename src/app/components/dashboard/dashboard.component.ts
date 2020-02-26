@@ -4,6 +4,7 @@ import {PostService} from '../../Service/post.service';
 import {Pictures} from '../../models/pictures';
 import {Router} from '@angular/router';
 import {Users} from '../../models/users';
+import {AuthenticationService} from '../../Service/authentication.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ import {Users} from '../../models/users';
 export class DashboardComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private picturesService: PicturesService, public postService: PostService, public users: Users, public router: Router) {
+  constructor(private picturesService: PicturesService, public postService: PostService, public users: Users, public router: Router, public authentification: AuthenticationService) {
+    console.log(this.users.email);
   }
   public picComment: string;
   ngOnInit() {
@@ -38,10 +40,14 @@ export class DashboardComponent implements OnInit {
     await this.picturesService.updatePicture(pic);
   }
   manageComment() {
-    this.postService.manageComments(this.users.username, this.picComment);
+    this.postService.manageComments(this.users.email, this.picComment);
   }
 
   showDetails() {
     this.router.navigateByUrl('/detailWindow');
+  }
+
+  signOut() {
+    return this.authentification.SignOut();
   }
 }
