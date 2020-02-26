@@ -56,4 +56,8 @@ export class LoginComponent  {
   signOut() {
     this.userService.SignOut();
   }
+
+  googleAuth() {
+    return this.userService.GoogleAuth();
+  }
 }

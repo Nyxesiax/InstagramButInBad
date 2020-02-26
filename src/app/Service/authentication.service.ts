@@ -31,12 +31,14 @@ export class AuthenticationService {
 
   /* Sign in */
   SignIn(email: string, password: string) {
+    console.log('email: ' + email);
+    console.log('pass: ' + password);
     this.angularFireAuth
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log('You are Successfully logged in!');
-        this.router.navigateByUrl('/dashBoard');
+        this.router.navigateByUrl('/dashboard');
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);

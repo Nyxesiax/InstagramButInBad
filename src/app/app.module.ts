@@ -1,22 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+
 import {AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+
+
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PicturesService } from './Service/pictures.service';
 import { DataserviceService } from './Service/dataservice.service';
+
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
-import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
-
-
+import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
 
 const appRoutes: Routes = [
   {
@@ -32,12 +36,13 @@ const appRoutes: Routes = [
     component: DashboardComponent
   },
   {
+    path: 'detailWindow',
+    component: DetailWindowComponent
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: 'dashBoard',
-    component: DashboardComponent},
   { path: '',
     component: StartScreenComponent} // ,
   // { path: '**', component: PageNotFoundComponent }
@@ -50,7 +55,8 @@ const appRoutes: Routes = [
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    DetailWindowComponent
   ],
   imports: [
     RouterModule.forRoot(
