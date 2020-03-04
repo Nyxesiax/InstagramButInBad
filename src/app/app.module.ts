@@ -1,22 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import {AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+
+
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PicturesService } from './Service/pictures.service';
 import { DataserviceService } from './Service/dataservice.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
-import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
-
-
+import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
+import {Users} from "./models/users";
 
 const appRoutes: Routes = [
   {
@@ -32,13 +35,16 @@ const appRoutes: Routes = [
     component: DashboardComponent
   },
   {
+    path: 'detailWindow',
+    component: DetailWindowComponent
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },
   { path: '',
     component: StartScreenComponent} // ,
-  //{ path: '**', component: PageNotFoundComponent }
-
+  // { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -48,12 +54,13 @@ const appRoutes: Routes = [
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    DetailWindowComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }),
+      {enableTracing: true}),
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -61,11 +68,9 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     FormsModule,
     HttpClientModule,
-    FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence()
+    ReactiveFormsModule
   ],
-  providers: [PicturesService, DataserviceService],
+  providers: [PicturesService, DataserviceService, UploadImageComponent, Users],
   bootstrap: [AppComponent]
 })
 export class AppModule {

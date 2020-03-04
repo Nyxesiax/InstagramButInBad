@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Users} from '../../modules/users';
-import {UsersService} from '../../Service/users.service';
+
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../../Service/authentication.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-start-screen',
@@ -9,27 +12,52 @@ import {UsersService} from '../../Service/users.service';
 })
 export class StartScreenComponent implements OnInit {
 
-  constructor(public service: UsersService) { }
+  email: string;
+  password: string;
+  registerForm: FormGroup;
+  errorMessage = '';
+  successMessage = '';
 
-  public email: string;
-  public password: string;
-  public username: string;
+  constructor(
+    private authenticationService: AuthenticationService,
+    public authService: AuthenticationService,
+    private router: Router,
+    private fb: FormBuilder
+) {
+  this.createForm();
+}
 
-  get getUsers(): any {
-    return this.service.users;
+createForm() {
+  this.registerForm = this.fb.group({
+    email: ['', Validators.required ],
+    password: ['', Validators.required]
+  });
+}
+
+
+  signUp() {
+
+    this.authenticationService.SignUp(this.email, this.password);
+    this.email = '';
+    this.password = '';
+  }
+
+  tryRegister(value) {
+    this.authenticationService.doRegister(value)
+      .then(res => {
+        console.log(res);
+        this.errorMessage = '';
+        this.successMessage = 'Your account has been created';
+      }, err => {
+        console.log(err);
+        this.errorMessage = err.message;
+        this.successMessage = '';
+      });
   }
 
   ngOnInit() {
   }
 
-  del(user: Users) {
-    this.service.del(user);
-  }
 
-  async save() {
-    if (! await this.service.save(this.email, this.password, this.username)) {
-      alert('Wow, das geht nicht');
-    }
-  }
 
 }
