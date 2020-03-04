@@ -23,6 +23,7 @@ export class PicturesService {
 
   // PicArray ausgeben
   pictures() {
+    console.log(this.picArray);
     return this.picArray;
   }
 

@@ -14,13 +14,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PicturesService } from './Service/pictures.service';
 import { DataserviceService } from './Service/dataservice.service';
-
-
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
+import {Users} from "./models/users";
 
 const appRoutes: Routes = [
   {
@@ -71,7 +70,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [PicturesService, DataserviceService],
+  providers: [PicturesService, DataserviceService, UploadImageComponent, Users],
   bootstrap: [AppComponent]
 })
 export class AppModule {
