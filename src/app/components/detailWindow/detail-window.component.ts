@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Pictures} from '../../models/pictures';
-import {PicturesService} from '../../Service/pictures.service';
+import { DetailWindowService } from '../../Service/detail-window.service';
+import { Observable } from 'rxjs';
+import { Comment } from 'src/app/models/comment';
 
 @Component({
   selector: 'app-detail-window',
@@ -9,13 +10,23 @@ import {PicturesService} from '../../Service/pictures.service';
 })
 export class DetailWindowComponent implements OnInit {
 
-  constructor(private picturesService: PicturesService) { }
+  constructor(
+    public detailWindowsService: DetailWindowService
+  ) { }
 
   ngOnInit() {
   }
 
-  /*get picture() {
-    return this.picturesService.showSinglePicture();
-  }*/
+  get activePicture() {
+    return this.detailWindowsService.activePicture;
+  }
+
+  get comments(): Observable<Comment[]> {
+    return this.detailWindowsService.comments;
+  }
+
+  loadComments() {
+    this.detailWindowsService.loadCommentsFromPicture();
+  }
 
 }

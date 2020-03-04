@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pictures } from '../models/pictures';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import { UploadImage } from '../models/upload-image';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class PicturesService {
 
   upload(uI: UploadImage) {
     this.af.collection('Pictures').add({
-      Tags: uI.tags, URL: uI.url, description: uI.description, likes: uI.likes, timestamp: uI.timestamp
+      tags: uI.tags, URL: uI.url, description: uI.description, likes: uI.likes, timestamp: uI.timestamp
     })
       .then(docRef => {
         console.log('Document written with ID: ', docRef.id);
@@ -43,7 +43,7 @@ export class PicturesService {
 
   async like(): Promise<boolean> {
     try {
-      this.af.collection('Pictures').valueChanges({likes: 'likes'});
+      this.af.collection('Pictures').valueChanges({likes: 'likes', idField: 'id'});
       return true;
     } catch (e) {
       return false;
@@ -61,5 +61,4 @@ export class PicturesService {
     const picture = this.af.collection('Pictures').doc(pic.id);
     // this.singlePicArray = picture as Observable<Pictures[]>;
   }
-
 }

@@ -19,7 +19,6 @@ export class UploadImageComponent implements OnInit {
   constructor(
     public pictureservice: PicturesService
   ) { }
-  public url: string;
 
 
 
@@ -58,7 +57,6 @@ export class UploadImageComponent implements OnInit {
     img.likes = 0;
     img.timestamp = new Date(Date.now());
     this.timestamp = img.timestamp;
-    this.url = img.url;
 
     // Save in Firestore
     this.pictureservice.upload(img);

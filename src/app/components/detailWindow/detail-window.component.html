@@ -1,3 +1,19 @@
-<li *ngFor="let pic of picture | async; let i = index">
-  <img [src]="pic.URL">
-</li>
+<img [src]="activePicture.URL">
+
+<p>Pic ID: {{activePicture.id}}</p>
+<p>Likes: {{activePicture.likes}}</p>
+
+<table class="table table-responsive table-hover">
+  <thead>
+    <th>Benutzer</th>
+    <th>Kommentar</th>
+    <th>Datum</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of comments | async">
+      <td>{{ c.userid }}</td>
+      <td>{{ c.comment }}</td>
+      <td>{{ c.date }}</td>
+    </tr>
+  </tbody>
+</table>
