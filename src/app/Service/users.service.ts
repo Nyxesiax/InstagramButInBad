@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {Users} from '../modules/users';
 import {HttpClient} from '@angular/common/http';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {auth} from 'firebase';
 import {Router} from '@angular/router';
+import {Users} from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,10 @@ import {Router} from '@angular/router';
 
 export class UsersService {
   users: Observable<any>;
-  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
-    this.users = af.collection('Users').valueChanges({idField: 'id'});
-  }
-  get getUsers() {
-    return this.users;
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public userBla: Users) {
+    this.users = af.collection('Users').valueChanges({ idField: 'id' });
   }
 
   del(user: Users) {
@@ -26,16 +25,27 @@ export class UsersService {
 
   async save(email: string, password: string, username: string): Promise<boolean> {
     try {
-      this.af.collection('Users').add({
-        'email': email,
-        'password': password,
-        'username': username
+      const ref = this.af.collection('Users').ref;
+
+
+      ref.where('email', '==', email).get().then(d => {
+        alert(JSON.stringify(d));
+        if (d) {
+          this.af.collection('Users').add({
+            'email': email,
+            'password': password,
+            'username': username
+          });
+        } else {
+          alert('den gibts schon');
+        }
       });
-      this.router.navigate(['/login']);
+      await this.router.navigate(['/login']);
       return true;
+
     } catch (e) {
-      return false;
-    }
+        return false;
+      }
   }
 
   // Sign in with Google
@@ -48,18 +58,10 @@ export class UsersService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
         console.log('You have been successfully logged in!' + JSON.stringify(result));
-        const username = result.user.displayName;
-        const email = result.user.email;
-        // this.router.navigateByUrl('');
+        this.userBla.email = result.user.email;
+        this.router.navigateByUrl('/dashboard');
       }).catch((error) => {
         console.log(error);
       });
-  }
-
-  SignOut() {
-    return this.afAuth.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigateByUrl('');
-    });
   }
 }

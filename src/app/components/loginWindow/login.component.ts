@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthenticationService} from '../../Service/authentication.service';
 import {UsersService} from '../../Service/users.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +10,45 @@ import {UsersService} from '../../Service/users.service';
   styleUrls: ['./login.component.css']
 })
 
-
-export class LoginComponent  {
-
-  constructor(private authenticationService: AuthenticationService, public userService: UsersService) {
-  }
-
+export class LoginComponent {
+  loginForm: FormGroup;
+  errorMessage = '';
   email: string;
   password: string;
 
+  constructor(
+    private authenticationService: AuthenticationService,
+    public userService: UsersService,
+    public authService: AuthenticationService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.createForm();
+  }
+
+  createForm() {
+    this.loginForm = this.fb.group({
+      email: ['hallo@test.de', Validators.required],
+      password: ['Hallo12345', Validators.required]
+    });
+  }
+
+  tryGoogleLogin() {
+    this.authService.doGoogleLogin()
+      .then(res => {
+        this.router.navigate(['/dashboard']);
+      });
+  }
+
+  tryLogin(value) {
+    this.authService.doLogin(value)
+      .then(res => {
+        this.router.navigate(['/dashboard']);
+      }, err => {
+        console.log(err);
+        this.errorMessage = err.message;
+      });
+  }
 
   signIn() {
     this.authenticationService.SignIn(this.email, this.password);
@@ -24,9 +56,7 @@ export class LoginComponent  {
     this.password = '';
   }
 
-
-  signOut() {
-    this.authenticationService.SignOut();
+  googleAuth() {
+    return this.userService.GoogleAuth();
   }
-
 }
