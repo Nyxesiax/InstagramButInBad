@@ -23,4 +23,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  search($event: KeyboardEvent) {
+    
+  }
 }
