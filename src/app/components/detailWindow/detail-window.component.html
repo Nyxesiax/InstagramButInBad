@@ -3,6 +3,10 @@
 <p>Pic ID: {{activePicture.id}}</p>
 <p>Likes: {{activePicture.likes}}</p>
 
+<input type="comment" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+  placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
+<button (click)="manageComment(pic)" class="btn btn-outline-success" style="margin-left:5px;">comment</button>
+
 <table class="table table-responsive table-hover">
   <thead>
     <th>Benutzer</th>
@@ -10,10 +14,9 @@
     <th>Datum</th>
   </thead>
   <tbody>
-    <tr *ngFor="let c of comments | async">
-      <td>{{ c.userid }}</td>
-      <td>{{ c.comment }}</td>
-      <td>{{ c.date }}</td>
+    <tr *ngFor="let c of comments | async; let i = index;">
+      <td>{{ c[i].author }}</td>
+      <td>{{ c[i].text }}</td>
     </tr>
   </tbody>
 </table>
