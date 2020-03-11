@@ -30,7 +30,6 @@ export class DetailWindowService {
 
       // Daten aus Datenbank in comments Array speichern
       this.comments = cmt as Observable<Comment[]>;
-
       console.log(`Kommentare zum Bild ${this.activePicture.id} geladen`);
 
     } else {
