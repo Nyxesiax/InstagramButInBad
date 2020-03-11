@@ -28,8 +28,6 @@ export class DetailWindowService {
         this.post = postsArr[0];
         console.table(this.post.comments);
       });
-
-
     } else {
       console.log('FEHLER: Kein Bild zum laden von Kommentaren ausgewählt!');
     }
