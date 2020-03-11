@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Pictures } from '../models/pictures';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Comment } from '../models/comment';
+import { Post } from '../models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -10,28 +10,24 @@ import { Comment } from '../models/comment';
 export class DetailWindowService {
 
   activePicture: Pictures;
-  comments: Observable<Comment[]>;
+  post: Post;
 
   constructor(
     public afs: AngularFirestore
   ) {
     this.loadCommentsFromPicture();
-   }
+  }
 
   loadCommentsFromPicture() {
     if (this.activePicture) {
-
       // Daten abfragen
-      const cmt = this.afs.collection('Comments', ref => {
-        // Nur Kommentare zurückgeben welche zum Bild gehören
-        return ref.where('picid', '==', this.activePicture.id);
-        // "Index" aus Firebase mitspeichern um löschen und so zu ermöglichen
-      }).valueChanges({ idField: 'id' });
 
-      // Daten aus Datenbank in comments Array speichern
-      this.comments = cmt as Observable<Comment[]>;
-      console.log(`Kommentare zum Bild ${this.activePicture.id} geladen`);
-
+      const posts = this.afs.collection('posts', ref => ref.where('picture.id', '==', this.activePicture.id))
+        .valueChanges({ idField: 'id' }) as any as Observable<Post>;
+      posts.subscribe(postsArr => {
+        this.post = postsArr[0];
+        console.table(this.post.comments);
+      });
     } else {
       console.log('FEHLER: Kein Bild zum laden von Kommentaren ausgewählt!');
     }
