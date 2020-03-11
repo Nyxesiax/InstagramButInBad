@@ -5,6 +5,7 @@ import {Pictures} from '../../models/pictures';
 import {Router} from '@angular/router';
 import {Users} from '../../models/users';
 import {AuthenticationService} from '../../Service/authentication.service';
+import {DetailWindowService} from '../../Service/detail-window.service';
 
 
 @Component({
@@ -14,9 +15,17 @@ import {AuthenticationService} from '../../Service/authentication.service';
 })
 export class DashboardComponent implements OnInit {
 
+  public picObject;
+
   // tslint:disable-next-line:max-line-length
-  constructor(private picturesService: PicturesService, public postService: PostService, public users: Users, public router: Router, public authentification: AuthenticationService) {
-    console.log(this.users.email);
+  constructor(
+    public picturesService: PicturesService,
+    public postService: PostService,
+    public users: Users,
+    public router: Router,
+    public authentification: AuthenticationService,
+    public detailWindowService: DetailWindowService
+  ) {
   }
   public picComment: string;
   ngOnInit() {
@@ -39,15 +48,19 @@ export class DashboardComponent implements OnInit {
     pic.likes--;
     await this.picturesService.updatePicture(pic);
   }
-  manageComment() {
-    this.postService.manageComments(this.users.email, this.picComment);
+  manageComment(pic: Pictures) {
+    this.postService.manageComments(this.users.email, this.picComment, pic.URL, pic.likes);
   }
 
-  showDetails() {
+  showDetails(picObject) {
+    this.detailWindowService.activePicture = picObject;
+    this.detailWindowService.loadCommentsFromPicture();
     this.router.navigateByUrl('/detailWindow');
   }
 
   signOut() {
     return this.authentification.SignOut();
+  }
+  getPicture() {
   }
 }

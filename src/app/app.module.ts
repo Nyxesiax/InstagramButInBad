@@ -14,8 +14,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PicturesService } from './Service/pictures.service';
 import { DataserviceService } from './Service/dataservice.service';
-
-
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -62,7 +60,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true}),
+      {enableTracing: false}),
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

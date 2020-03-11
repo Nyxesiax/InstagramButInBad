@@ -1,3 +1,21 @@
-<li *ngFor="let pic of picture | async; let i = index">
-  <img [src]="pic.URL">
-</li>
+<img [src]="activePicture.URL">
+
+<p>Pic ID: {{activePicture.id}}</p>
+<p>Likes: {{activePicture.likes}}</p>
+
+<input type="comment" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+  placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
+<button (click)="manageComment()" class="btn btn-outline-success" style="margin-left:5px;">comment</button>
+
+<table class="table table-responsive table-hover">
+  <thead>
+    <th>Benutzer</th>
+    <th>Kommentar</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of post.comments">
+      <td>{{ c.author }}</td>
+      <td>{{ c.text }}</td>
+    </tr>
+  </tbody>
+</table>
