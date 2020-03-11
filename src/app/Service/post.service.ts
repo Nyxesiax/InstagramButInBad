@@ -24,9 +24,6 @@ export class PostService {
     const pic = new Pictures(this.detailWindowService.activePicture.id, url, text, likes, Date.now().toString());
     this.commentArray.push(new PicComment(user, text));
     const p = new Post(pic, this.commentArray);
-    const commentarray = this.commentArray.map((obj => {
-      return Object.assign({}, obj);
-    }));
    // this.af.collection('posts').add(JSON.parse(JSON.stringify(p)));
     this.af.collection('posts').doc(
        '5UD9ixrzzuaHpqgDiXsf').set({
