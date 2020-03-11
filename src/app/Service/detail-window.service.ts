@@ -10,7 +10,7 @@ import { Post } from '../models/post';
 export class DetailWindowService {
 
   activePicture: Pictures;
-  posts: Observable<Post[]>;
+  post: Post;
 
   constructor(
     public afs: AngularFirestore
@@ -20,23 +20,13 @@ export class DetailWindowService {
 
   loadCommentsFromPicture() {
     if (this.activePicture) {
-
       // Daten abfragen
-      const p = this.afs.collection('posts', ref => {
-        // Nur Kommentare zurückgeben welche zum Bild gehören
-        return ref.where('picture.id', '==', this.activePicture.id).limit(1);
-        // "Index" aus Firebase mitspeichern um löschen und so zu ermöglichen
-      }).valueChanges({ idField: 'id' });
 
-      // Daten aus Datenbank in comments Array speichern
-      this.posts = p as Observable<Post[]>;
-
-      console.log(`Kommentare zum Bild ${this.activePicture.id} geladen`);
-
-      p.subscribe(pppp => {
-
-        console.table(pppp);
-
+      const posts = this.afs.collection('posts', ref => ref.where('picture.id', '==', this.activePicture.id))
+        .valueChanges({ idField: 'id' }) as any as Observable<Post>;
+      posts.subscribe(postsArr => {
+        this.post = postsArr[0];
+        console.table(this.post.comments);
       });
 
 

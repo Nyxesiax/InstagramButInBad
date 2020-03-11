@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit {
     public authentification: AuthenticationService,
     public detailWindowService: DetailWindowService
   ) {
-    console.log(this.users.email);
   }
   public picComment: string;
   ngOnInit() {
