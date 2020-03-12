@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
-import {UsersService} from '../../Service/users.service';
 import {PostService} from '../../Service/post.service';
-import {LoginComponent} from '../loginWindow/login.component';
 import {Pictures} from '../../models/pictures';
+import {Router} from '@angular/router';
+import {Users} from '../../models/users';
+import {AuthenticationService} from '../../Service/authentication.service';
+import {DetailWindowService} from '../../Service/detail-window.service';
 
 
 @Component({
@@ -13,8 +15,17 @@ import {Pictures} from '../../models/pictures';
 })
 export class DashboardComponent implements OnInit {
 
+  public picObject;
+
   // tslint:disable-next-line:max-line-length
-  constructor(private picturesService: PicturesService, public userService: UsersService, public postService: PostService) {
+  constructor(
+    public picturesService: PicturesService,
+    public postService: PostService,
+    public users: Users,
+    public router: Router,
+    public authentification: AuthenticationService,
+    public detailWindowService: DetailWindowService
+  ) {
   }
   public picComment: string;
   ngOnInit() {
@@ -37,10 +48,19 @@ export class DashboardComponent implements OnInit {
     pic.likes--;
     await this.picturesService.updatePicture(pic);
   }
-    get currentUser() {
-    return this.userService.currentUser;
+  manageComment(pic: Pictures) {
+    this.postService.manageComments(this.users.email, this.picComment, pic.URL, pic.likes);
   }
-  manageComment() {
-    this.postService.manageComments(this.currentUser.email, this.picComment);
+
+  showDetails(picObject) {
+    this.detailWindowService.activePicture = picObject;
+    this.detailWindowService.loadCommentsFromPicture();
+    this.router.navigateByUrl('/detailWindow');
+  }
+
+  signOut() {
+    return this.authentification.SignOut();
+  }
+  getPicture() {
   }
 }

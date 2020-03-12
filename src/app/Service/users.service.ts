@@ -14,12 +14,10 @@ import { User } from '../modules/user';
 
 export class UsersService {
   users: Observable<any>;
-  currentUser: User;
-  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router) {
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public userBla: Users) {
     this.users = af.collection('Users').valueChanges({ idField: 'id' });
-  }
-  get getUsers() {
-    return this.users;
   }
 
   del(user: Users) {
@@ -28,16 +26,27 @@ export class UsersService {
 
   async save(email: string, password: string, username: string): Promise<boolean> {
     try {
-      this.af.collection('Users').add({
-        'email': email,
-        'password': password,
-        'username': username
+      const ref = this.af.collection('Users').ref;
+
+
+      ref.where('email', '==', email).get().then(d => {
+        alert(JSON.stringify(d));
+        if (d) {
+          this.af.collection('Users').add({
+            'email': email,
+            'password': password,
+            'username': username
+          });
+        } else {
+          alert('den gibts schon');
+        }
       });
       await this.router.navigate(['/login']);
       return true;
+
     } catch (e) {
-      return false;
-    }
+        return false;
+      }
   }
 
   // Sign in with Google
@@ -50,20 +59,10 @@ export class UsersService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
         console.log('You have been successfully logged in!' + JSON.stringify(result));
-        const username = result.user.displayName;
-        const email = result.user.email;
-        this.currentUser = result.user;
-
+        this.userBla.email = result.user.email;
         this.router.navigateByUrl('/dashboard');
       }).catch((error) => {
         console.log(error);
       });
-  }
-
-  SignOut() {
-    return this.afAuth.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigateByUrl('');
-    });
   }
 }

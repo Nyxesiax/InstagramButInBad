@@ -8,8 +8,5 @@ export class UploadImage {
     public likes?: number,
     public timestamp?: Date
   ) {
-
   }
-
-
 }
