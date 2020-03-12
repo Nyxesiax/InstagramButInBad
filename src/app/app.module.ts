@@ -16,10 +16,10 @@ import { PicturesService } from './Service/pictures.service';
 import { DataserviceService } from './Service/dataservice.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import {AngularFireModule} from '@angular/fire';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
 import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
-import {Users} from "./models/users";
+import { Users } from "./models/users";
 
 const appRoutes: Routes = [
   {
@@ -42,8 +42,10 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  { path: '',
-    component: StartScreenComponent} // ,
+  {
+    path: '',
+    component: StartScreenComponent
+  } // ,
   // { path: '**', component: PageNotFoundComponent }
 ];
 
