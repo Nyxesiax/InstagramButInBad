@@ -9,7 +9,7 @@ import { Post } from '../models/post';
 })
 export class DetailWindowService {
 
-  activePicture: Pictures;
+  activePost: Post;
   post: Post;
 
   constructor(
@@ -19,10 +19,10 @@ export class DetailWindowService {
   }
 
   loadCommentsFromPicture() {
-    if (this.activePicture) {
+    if (this.activePost) {
       // Daten abfragen
 
-      const posts = this.afs.collection('posts', ref => ref.where('picture.id', '==', this.activePicture.id))
+      const posts = this.afs.collection('posts')
         .valueChanges({ idField: 'id' }) as any as Observable<Post>;
       posts.subscribe(postsArr => {
         this.post = postsArr[0];

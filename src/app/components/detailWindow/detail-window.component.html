@@ -1,7 +1,7 @@
-<img [src]="activePicture.URL">
+<img [src]="activePost.picture.URL">
 
-<p>Pic ID: {{activePicture.id}}</p>
-<p>Likes: {{activePicture.likes}}</p>
+<p>Pic ID: {{activePost.picture.id}}</p>
+<p>Likes: {{activePost.picture.likes}}</p>
 
 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
   placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">

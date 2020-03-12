@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DetailWindowService } from '../../Service/detail-window.service';
-import { Observable } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/Service/post.service';
 import { Users } from 'src/app/models/users';
@@ -23,8 +22,8 @@ export class DetailWindowComponent implements OnInit {
   ngOnInit() {
   }
 
-  get activePicture() {
-    return this.detailWindowsService.activePicture;
+  get activePost() {
+    return this.detailWindowsService.activePost;
   }
 
   get post(): Post {
@@ -36,7 +35,7 @@ export class DetailWindowComponent implements OnInit {
   }
 
   manageComment() {
-    this.postService.manageComments(this.users.email, this.picComment, this.activePicture.URL, this.activePicture.likes);
+    this.postService.manageComments(this.users.email, this.picComment, this.activePost.picture.URL, this.activePost.picture.likes);
   }
 
 }
