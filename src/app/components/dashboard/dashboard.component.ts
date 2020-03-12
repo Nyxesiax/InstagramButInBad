@@ -61,6 +61,4 @@ export class DashboardComponent implements OnInit {
   signOut() {
     return this.authentification.SignOut();
   }
-  getPicture() {
-  }
 }
