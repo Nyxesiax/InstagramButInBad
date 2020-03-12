@@ -19,7 +19,6 @@ export class UploadImageComponent implements OnInit {
   constructor(
     public pictureservice: PicturesService
   ) { }
-  public url: string;
 
 
 
@@ -32,11 +31,17 @@ export class UploadImageComponent implements OnInit {
 
     if (files && file) {
       const reader = new FileReader();
-      reader.onload = this._convertFileToBase64.bind(this);
-      reader.readAsBinaryString(file);
+      reader.readAsDataURL(file);
+      reader.onload = (() => {
+        console.log('IMAGE: ' + reader.result);
+        this.base64textString = reader.result.toString();
+      });
+      // reader.onload = this._convertFileToBase64.bind(this);
+      // reader.readAsBinaryString(file);
 
     }
   }
+
 
   _convertFileToBase64(readerEvt) {
     // file to string
@@ -58,7 +63,6 @@ export class UploadImageComponent implements OnInit {
     img.likes = 0;
     img.timestamp = new Date(Date.now());
     this.timestamp = img.timestamp;
-    this.url = img.url;
 
     // Save in Firestore
     this.pictureservice.upload(img);

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {HttpClient} from '@angular/common/http';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
-import {auth} from 'firebase';
-import {Router} from '@angular/router';
-import {Users} from '../models/users';
+import { Users } from '../models/users';
+import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { auth } from 'firebase';
+import { Router } from '@angular/router';
+import { User } from '../modules/user';
 
 @Injectable({
   providedIn: 'root'

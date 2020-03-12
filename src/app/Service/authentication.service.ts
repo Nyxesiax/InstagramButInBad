@@ -12,7 +12,7 @@ import {Users} from '../models/users';
 export class AuthenticationService {
   userData: Observable<firebase.User>;
 
-  constructor(private angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
+  constructor(public angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
     this.userData = angularFireAuth.authState;
   }
 

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Pictures} from '../../models/pictures';
-import {PicturesService} from '../../Service/pictures.service';
+import { DetailWindowService } from '../../Service/detail-window.service';
+import { Observable } from 'rxjs';
+import { Post } from 'src/app/models/post';
+import { PostService } from 'src/app/Service/post.service';
+import { Users } from 'src/app/models/users';
 
 @Component({
   selector: 'app-detail-window',
@@ -9,13 +12,31 @@ import {PicturesService} from '../../Service/pictures.service';
 })
 export class DetailWindowComponent implements OnInit {
 
-  constructor(private picturesService: PicturesService) { }
+  picComment: string;
+
+  constructor(
+    public detailWindowsService: DetailWindowService,
+    public postService: PostService,
+    public users: Users
+  ) { }
 
   ngOnInit() {
   }
 
-  /*get picture() {
-    return this.picturesService.showSinglePicture();
-  }*/
+  get activePicture() {
+    return this.detailWindowsService.activePicture;
+  }
+
+  get post(): Post {
+    return this.detailWindowsService.post;
+  }
+
+  loadComments() {
+    this.detailWindowsService.loadCommentsFromPicture();
+  }
+
+  manageComment() {
+    this.postService.manageComments(this.users.email, this.picComment, this.activePicture.URL, this.activePicture.likes);
+  }
 
 }
