@@ -25,7 +25,7 @@ export class PicturesService {
   }
 
   // PicArray ausgeben
-  pictures() {
+  posts() {
     console.table(this.picArray);
     console.log(this.picArray);
     return this.picArray;

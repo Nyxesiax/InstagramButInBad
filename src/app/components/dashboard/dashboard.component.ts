@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
-import {PostService} from '../../Service/post.service';
 import {Router} from '@angular/router';
 import {Users} from '../../models/users';
 import {AuthenticationService} from '../../Service/authentication.service';
@@ -20,7 +19,6 @@ export class DashboardComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   constructor(
     public picturesService: PicturesService,
-    public postService: PostService,
     public users: Users,
     public router: Router,
     public authentification: AuthenticationService,
@@ -32,8 +30,8 @@ export class DashboardComponent implements OnInit {
   }
 
   // PicArray aus Service für HTML als fake property bereitstellen
-  get pictures() {
-    return this.picturesService.pictures();
+  get posts() {
+    return this.picturesService.posts();
   }
   async like() {
     await this.picturesService.like();
@@ -47,10 +45,6 @@ export class DashboardComponent implements OnInit {
   async likesDown(pic: Post) {
     pic.picture.likes--;
     await this.picturesService.updatePicture(pic);
-  }
-
-  manageComment(pic: Post) {
-    this.postService.manageComments(this.users.email, this.picComment, pic.picture.URL, pic.picture.likes);
   }
 
   showDetails(picObject) {

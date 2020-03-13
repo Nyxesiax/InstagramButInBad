@@ -13,7 +13,7 @@
     <th>Kommentar</th>
   </thead>
   <tbody>
-    <tr *ngFor="let c of post.comments">
+    <tr *ngFor="let c of activePost.comments">
       <td>{{ c.author }}</td>
       <td>{{ c.text }}</td>
     </tr>

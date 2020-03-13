@@ -35,7 +35,8 @@ export class DetailWindowComponent implements OnInit {
   }
 
   manageComment() {
-    this.postService.manageComments(this.users.email, this.picComment, this.activePost.picture.URL, this.activePost.picture.likes);
+    this.postService.manageComments(this.detailWindowsService.activePost, this.users.email,
+      this.picComment, this.activePost.picture.URL, this.activePost.picture.likes);
   }
 
 }
