@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
 import { UploadImage } from 'src/app/models/upload-image';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-upload-image',
@@ -17,9 +18,10 @@ export class UploadImageComponent implements OnInit {
   base64textString: string;
 
   constructor(
-    public pictureservice: PicturesService
+    public pictureservice: PicturesService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
-  public url: string;
 
 
 
@@ -32,11 +34,17 @@ export class UploadImageComponent implements OnInit {
 
     if (files && file) {
       const reader = new FileReader();
-      reader.onload = this._convertFileToBase64.bind(this);
-      reader.readAsBinaryString(file);
+      reader.readAsDataURL(file);
+      reader.onload = (() => {
+        console.log('IMAGE: ' + reader.result);
+        this.base64textString = reader.result.toString();
+      });
+      // reader.onload = this._convertFileToBase64.bind(this);
+      // reader.readAsBinaryString(file);
 
     }
   }
+
 
   _convertFileToBase64(readerEvt) {
     // file to string
@@ -58,7 +66,6 @@ export class UploadImageComponent implements OnInit {
     img.likes = 0;
     img.timestamp = new Date(Date.now());
     this.timestamp = img.timestamp;
-    this.url = img.url;
 
     // Save in Firestore
     this.pictureservice.upload(img);
@@ -67,6 +74,8 @@ export class UploadImageComponent implements OnInit {
     this.tags = '';
     this.base64textString = '';
     this.description = '';
+    this.router.navigate(['/dashboard']);
+
 
   }
 
