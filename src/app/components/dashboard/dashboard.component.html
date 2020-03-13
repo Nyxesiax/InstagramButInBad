@@ -16,6 +16,7 @@
           <div class="card-body">
             <h5 class="card-title">{{pic.picture.description}}</h5>
             <p class="card-text">{{pic.picture.timestamp}}</p>
+            <p class="card-text">{{pic.picture.likes}}</p>
             <button type="submit" class="btn btn-success" (click)="likesUp(pic)"> Like </button>
             <button type="submit" class="btn btn-danger" (click)="likesDown(pic)"> Dislike </button>
           </div>

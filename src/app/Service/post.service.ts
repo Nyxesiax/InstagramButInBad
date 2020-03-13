@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import {Pictures} from '../models/pictures';
 import {PicComment} from '../models/pic.comment';
 import {Post} from '../models/post';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import { DetailWindowService } from './detail-window.service';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +12,10 @@ import {map} from 'rxjs/operators';
 export class PostService {
 
   constructor(
-    public af: AngularFirestore,
-    public detailWindowService: DetailWindowService
+    public af: AngularFirestore
   ) {
     this.posts = this.af.collection('posts').valueChanges({ idField: 'id' }) as any as Observable<Post[]>;
   }
-
-  public postId: AngularFirestoreCollection<Post>;
   public posts: Observable<Post[]>;
 
 

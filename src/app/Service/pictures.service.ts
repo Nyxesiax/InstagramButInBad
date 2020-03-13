@@ -58,8 +58,8 @@ export class PicturesService {
 
   async updatePicture(pic: Post) {
     this.af.collection('posts').doc(pic.id).update({
-      URL: pic.picture.URL,
-      likes: pic.picture.likes
+      'picture.URL': pic.picture.URL,
+      'picture.likes': pic.picture.likes
     });
   }
 
