@@ -25,8 +25,8 @@ export class DetailWindowService {
       const posts = this.afs.collection('posts')
         .valueChanges({ idField: 'id' }) as any as Observable<Post>;
       posts.subscribe(postsArr => {
-        this.post = postsArr[0];
-        console.table(this.post.comments);
+        this.post = postsArr;
+        console.table(this.activePost.comments);
       });
     } else {
       console.log('FEHLER: Kein Bild zum laden von Kommentaren ausgewählt!');

@@ -20,27 +20,22 @@ export class PostService {
     this.posts = this.af.collection('posts').valueChanges({ idField: 'id' }) as any as Observable<Post[]>;
   }
 
-  private commentArray: PicComment[] = [];
   public postId: AngularFirestoreCollection<Post>;
   public posts: Observable<Post[]>;
 
 
-
   createPost(id: string, url: string, description: string, likes: number) {
     const pic = new Pictures(id, url, description, likes, Date.now().toString());
-    this.commentArray.push(new PicComment(null, null));
-    const p = new Post(pic, this.commentArray);
+    const p = new Post(pic, []);
     this.af.collection('posts').add(JSON.parse(JSON.stringify(p)));
   }
 
   manageComments(post: Post, user: string, text: string, url: string, likes: number) {
-    const pic = new Pictures(this.detailWindowService.activePost.picture.id, url, text, likes, Date.now().toString());
-    this.commentArray.push(new PicComment(user, text));
-    const p = new Post(pic, this.commentArray);
+    post.comments.push(new PicComment(user, text));
     this.af.collection('posts').doc(post.id
-       ).set({
-        comments: JSON.parse(JSON.stringify(this.commentArray)),
-        picture: JSON.parse(JSON.stringify(pic))
+       ).update({
+        comments: JSON.parse(JSON.stringify(post.comments)),
+        picture: JSON.parse(JSON.stringify(post.picture))
       }
     );
    }

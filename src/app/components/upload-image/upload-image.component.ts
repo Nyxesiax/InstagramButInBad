@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
 import { UploadImage } from 'src/app/models/upload-image';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-upload-image',
@@ -17,7 +18,9 @@ export class UploadImageComponent implements OnInit {
   base64textString: string;
 
   constructor(
-    public pictureservice: PicturesService
+    public pictureservice: PicturesService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
 
@@ -71,6 +74,8 @@ export class UploadImageComponent implements OnInit {
     this.tags = '';
     this.base64textString = '';
     this.description = '';
+    this.router.navigate(['/dashboard']);
+
 
   }
 
