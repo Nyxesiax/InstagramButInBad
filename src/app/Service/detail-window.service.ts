@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {HostListener, Injectable} from '@angular/core';
 import { Pictures } from '../models/pictures';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -30,6 +30,17 @@ export class DetailWindowService {
       });
     } else {
       console.log('FEHLER: Kein Bild zum laden von Kommentaren ausgewählt!');
+    }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+    if (window.pageYOffset >= 550) {
+      const element = document.getElementById('navbar');
+      element.classList.add('sticky');
+    } else {
+      const element = document.getElementById('navbar');
+      element.classList.remove('sticky');
     }
   }
 }

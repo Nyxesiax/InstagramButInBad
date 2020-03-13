@@ -1,5 +1,6 @@
 <h1 class="mt-5">{{users.email}}</h1>
 
+<body (scroll)="onWindowScroll($event)">
 <div class="container">
   <div class="row">
       <!-- PicArray ASYNC durchgehen weil observable -->
@@ -26,4 +27,4 @@
       </div>
   <button type="submit" class="btn btn-primary" (click)="signOut()">Sign out</button>
 </div>
-
+</body>

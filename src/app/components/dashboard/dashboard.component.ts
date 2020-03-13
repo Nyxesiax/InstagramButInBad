@@ -56,4 +56,8 @@ export class DashboardComponent implements OnInit {
   signOut() {
     return this.authentification.SignOut();
   }
+
+ /* onWindowScroll(e) {
+    this.detailWindowService.onWindowScroll(e);
+  } */
 }
