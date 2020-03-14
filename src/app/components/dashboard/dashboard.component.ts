@@ -5,6 +5,7 @@ import {Users} from '../../models/users';
 import {AuthenticationService} from '../../Service/authentication.service';
 import {DetailWindowService} from '../../Service/detail-window.service';
 import {Post} from '../../models/post';
+import {NavbarComponent} from "../navbar/navbar.component";
 
 
 @Component({
@@ -56,8 +57,4 @@ export class DashboardComponent implements OnInit {
   signOut() {
     return this.authentification.SignOut();
   }
-
- /* onWindowScroll(e) {
-    this.detailWindowService.onWindowScroll(e);
-  } */
 }

@@ -15,8 +15,9 @@
           <img class="card-img-top" [src]="pic.picture.URL" (click)="showDetails(pic)" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{pic.picture.description}}</h5>
+            <h6 class="card-title">Tags: {{pic.picture.tags}}</h6>
             <p class="card-text">{{pic.picture.timestamp}}</p>
-            <p class="card-text">{{pic.picture.likes}}</p>
+            <p class="card-text">Likes: {{pic.picture.likes}}</p>
             <button type="submit" class="btn btn-success" (click)="likesUp(pic)"> Like </button>
             <button type="submit" class="btn btn-danger" (click)="likesDown(pic)"> Dislike </button>
           </div>
