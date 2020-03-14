@@ -19,13 +19,13 @@ export class PostService {
   public posts: Observable<Post[]>;
 
 
-  createPost(id: string, url: string, description: string, likes: number) {
-    const pic = new Pictures(id, url, description, likes, Date.now().toString());
+  createPost(id: string, url: string, description: string, likes: number, tags: string) {
+    const pic = new Pictures(id, url, description, likes, new Date().toLocaleTimeString() + ', ' + new Date().toLocaleDateString(), tags);
     const p = new Post(pic, []);
     this.af.collection('posts').add(JSON.parse(JSON.stringify(p)));
   }
 
-  manageComments(post: Post, user: string, text: string, url: string, likes: number) {
+  manageComments(post: Post, user: string, text: string) {
     post.comments.push(new PicComment(user, text));
     this.af.collection('posts').doc(post.id
        ).update({

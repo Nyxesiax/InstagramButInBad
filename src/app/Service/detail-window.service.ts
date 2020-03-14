@@ -32,15 +32,4 @@ export class DetailWindowService {
       console.log('FEHLER: Kein Bild zum laden von Kommentaren ausgewählt!');
     }
   }
-
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
-    if (window.pageYOffset >= 550) {
-      const element = document.getElementById('navbar');
-      element.classList.add('sticky');
-    } else {
-      const element = document.getElementById('navbar');
-      element.classList.remove('sticky');
-    }
-  }
 }
