@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+
 import { DetailWindowService } from '../../Service/detail-window.service';
 import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/Service/post.service';
 import { Users } from 'src/app/models/users';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({

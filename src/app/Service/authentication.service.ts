@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import {Router} from '@angular/router';
 import * as firebase from 'firebase';
 import {Users} from '../models/users';
+import {auth} from 'firebase';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -106,4 +107,20 @@ export class AuthenticationService {
     });
   }
 
+  // Sign in with Google
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider());
+  }
+
+  // Auth logic to run auth providers
+  AuthLogin(provider) {
+    return this.angularFireAuth.auth.signInWithPopup(provider)
+      .then((result) => {
+        console.log('You have been successfully logged in!' + JSON.stringify(result));
+        this.userbla.email = result.user.email;
+        this.router.navigateByUrl('/dashboard');
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
 }

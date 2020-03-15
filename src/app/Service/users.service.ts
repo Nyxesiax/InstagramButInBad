@@ -1,12 +1,8 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Users } from '../models/users';
-import { HttpClient } from '@angular/common/http';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { auth } from 'firebase';
-import { Router } from '@angular/router';
-import { User } from '../modules/user';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Router} from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +12,10 @@ export class UsersService {
   users: Observable<any>;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public userBla: Users) {
+  constructor(private af: AngularFirestore, public router: Router) {
     this.users = af.collection('Users').valueChanges({ idField: 'id' });
   }
-
+/*
   del(user: Users) {
     this.af.collection('Users').doc(user.id).delete();
   }
@@ -47,22 +43,7 @@ export class UsersService {
     } catch (e) {
         return false;
       }
-  }
+  } */
 
-  // Sign in with Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
-  }
 
-  // Auth logic to run auth providers
-  AuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then((result) => {
-        console.log('You have been successfully logged in!' + JSON.stringify(result));
-        this.userBla.email = result.user.email;
-        this.router.navigateByUrl('/dashboard');
-      }).catch((error) => {
-        console.log(error);
-      });
-  }
 }

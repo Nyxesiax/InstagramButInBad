@@ -1,13 +1,16 @@
+<body>
+<div>
+ <h5>{{activePost.owner}}</h5>
+
 <form [formGroup]="commentForm"></form>
 <img [src]="activePost.picture.URL">
 
-<p>Pic ID: {{activePost.picture.id}}</p>
-<p>Likes: {{activePost.picture.likes}}</p>
+<h5>Likes: {{activePost.picture.likes}}</h5>
 
 <input type="text" class="form-control" id="comment"
   placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
 <button (click)="manageComment()" class="btn btn-outline-success" style="margin-left:5px;">comment</button>
-
+</div>
 <table class="table table-responsive table-hover">
   <thead>
     <th>Benutzer</th>
@@ -20,3 +23,4 @@
     </tr>
   </tbody>
 </table>
+</body>

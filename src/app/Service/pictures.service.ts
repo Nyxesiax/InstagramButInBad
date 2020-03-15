@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Pictures } from '../models/pictures';
-import {AngularFirestore} from '@angular/fire/firestore';
 import { UploadImage } from '../models/upload-image';
 import {Post} from '../models/post';
 import {PostService} from './post.service';
-import {DetailWindowService} from './detail-window.service';
+import {Users} from '../models/users';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class PicturesService {
   private picArray: Observable<Post[]>;
   private singlePicArray: Observable<Pictures[]>;
 
-  constructor(private af: AngularFirestore, public postService: PostService, public detailwindowService: DetailWindowService) {
+  constructor(private af: AngularFirestore, public postService: PostService, public user: Users) {
     // Bilder aus Firebase laden, nach timestamp DESC sortieren und in picArray speichern
     const pics = this.af.collection('posts', ref => {
       return ref.orderBy('picture.timestamp', 'desc');
@@ -41,7 +41,11 @@ export class PicturesService {
       tags: uI.tags, URL: uI.url, description: uI.description, likes: uI.likes, timestamp: uI.timestamp
     })
       .then(docRef => {
+<<<<<<< HEAD
+        this.postService.createPost(docRef.id, uI.url, uI.description, uI.likes, this.user.email );
+=======
         this.postService.createPost(docRef.id, uI.url, uI.description, uI.likes, uI.tags);
+>>>>>>> e7421766975fbb20a95f9d71987801dc3ca8b336
         console.log('Document written with ID: ', docRef.id);
       });
   }

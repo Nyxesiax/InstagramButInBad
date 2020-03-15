@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+
 import { PicturesService } from 'src/app/Service/pictures.service';
 import { UploadImage } from 'src/app/models/upload-image';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-upload-image',
