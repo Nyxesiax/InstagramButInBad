@@ -1,15 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-
 import {AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-
-
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PicturesService } from './Service/pictures.service';
@@ -19,12 +16,8 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
-<<<<<<< HEAD
-import { Users } from "./models/users";
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-=======
-import { Users } from './models/users';
->>>>>>> e7421766975fbb20a95f9d71987801dc3ca8b336
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {Users} from './models/users';
 
 const appRoutes: Routes = [
   {
