@@ -13,10 +13,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  public picObject;
-
-  // tslint:disable-next-line:max-line-length
+// tslint:disable-next-line:max-line-length
   constructor(
     public picturesService: PicturesService,
     public users: Users,
@@ -25,7 +22,6 @@ export class DashboardComponent implements OnInit {
     public detailWindowService: DetailWindowService
   ) {
   }
-  public picComment: string;
   ngOnInit() {
   }
 
