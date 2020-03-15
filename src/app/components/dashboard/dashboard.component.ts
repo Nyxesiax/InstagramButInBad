@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+
 import { PicturesService } from 'src/app/Service/pictures.service';
-import {Router} from '@angular/router';
 import {Users} from '../../models/users';
 import {AuthenticationService} from '../../Service/authentication.service';
 import {DetailWindowService} from '../../Service/detail-window.service';
 import {Post} from '../../models/post';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 
 @Component({

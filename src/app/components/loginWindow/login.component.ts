@@ -1,8 +1,7 @@
-import {Component} from '@angular/core';
 import {AuthenticationService} from '../../Service/authentication.service';
-import {UsersService} from '../../Service/users.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +17,6 @@ export class LoginComponent {
 
   constructor(
     private authenticationService: AuthenticationService,
-    public userService: UsersService,
     public authService: AuthenticationService,
     private router: Router,
     private fb: FormBuilder
@@ -50,13 +48,7 @@ export class LoginComponent {
       });
   }
 
-  signIn() {
-    this.authenticationService.SignIn(this.email, this.password);
-    this.email = '';
-    this.password = '';
-  }
-
   googleAuth() {
-    return this.userService.GoogleAuth();
+    return this.authService.GoogleAuth();
   }
 }

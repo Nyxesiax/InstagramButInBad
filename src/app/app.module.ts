@@ -20,6 +20,7 @@ import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
 import { Users } from "./models/users";
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const appRoutes: Routes = [
   {
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     NavbarComponent,
     UploadImageComponent,
-    DetailWindowComponent
+    DetailWindowComponent,
+    UserProfileComponent
   ],
   imports: [
     RouterModule.forRoot(

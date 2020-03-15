@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+
 import {Pictures} from '../models/pictures';
 import {PicComment} from '../models/pic.comment';
 import {Post} from '../models/post';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,9 @@ export class PostService {
   public posts: Observable<Post[]>;
 
 
-  createPost(id: string, url: string, description: string, likes: number) {
+  createPost(id: string, url: string, description: string, likes: number, owner: string) {
     const pic = new Pictures(id, url, description, likes, Date.now().toString());
-    const p = new Post(pic, []);
+    const p = new Post(owner , pic, []);
     this.af.collection('posts').add(JSON.parse(JSON.stringify(p)));
   }
 

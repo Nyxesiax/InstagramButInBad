@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Users } from '../../models/users';
-import { UsersService } from '../../Service/users.service';
 import { AuthenticationService } from '../../Service/authentication.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-start-screen',
@@ -33,14 +31,6 @@ createForm() {
     password: ['', Validators.required]
   });
 }
-
-
-  signUp() {
-
-    this.authenticationService.SignUp(this.email, this.password);
-    this.email = '';
-    this.password = '';
-  }
 
   tryRegister(value) {
     this.authenticationService.doRegister(value)

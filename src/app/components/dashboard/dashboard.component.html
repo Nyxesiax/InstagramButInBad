@@ -12,6 +12,9 @@
 
 
         <div *ngFor="let pic of posts | async; let i = index" class="col-12 col-sm-6 col-lg-4 post card" style="width: 18rem;">
+          <div class="card-header">
+            <h5>{{pic.owner}}</h5>
+          </div>
           <img class="card-img-top" [src]="pic.picture.URL" (click)="showDetails(pic)" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{pic.picture.description}}</h5>
