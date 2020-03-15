@@ -1,11 +1,13 @@
 <body>
 <div>
  <h5>{{activePost.owner}}</h5>
+
+<form [formGroup]="commentForm"></form>
 <img [src]="activePost.picture.URL">
 
 <h5>Likes: {{activePost.picture.likes}}</h5>
 
-<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+<input type="text" class="form-control" id="comment"
   placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
 <button (click)="manageComment()" class="btn btn-outline-success" style="margin-left:5px;">comment</button>
 </div>

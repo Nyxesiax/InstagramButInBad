@@ -1,4 +1,3 @@
-
 import { PicturesService } from 'src/app/Service/pictures.service';
 import {Users} from '../../models/users';
 import {AuthenticationService} from '../../Service/authentication.service';
@@ -57,8 +56,4 @@ export class DashboardComponent implements OnInit {
   signOut() {
     return this.authentification.SignOut();
   }
-
- /* onWindowScroll(e) {
-    this.detailWindowService.onWindowScroll(e);
-  } */
 }

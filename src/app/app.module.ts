@@ -16,11 +16,15 @@ import { PicturesService } from './Service/pictures.service';
 import { DataserviceService } from './Service/dataservice.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
+<<<<<<< HEAD
 import { Users } from "./models/users";
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+=======
+import { Users } from './models/users';
+>>>>>>> e7421766975fbb20a95f9d71987801dc3ca8b336
 
 const appRoutes: Routes = [
   {

@@ -41,7 +41,11 @@ export class PicturesService {
       tags: uI.tags, URL: uI.url, description: uI.description, likes: uI.likes, timestamp: uI.timestamp
     })
       .then(docRef => {
+<<<<<<< HEAD
         this.postService.createPost(docRef.id, uI.url, uI.description, uI.likes, this.user.email );
+=======
+        this.postService.createPost(docRef.id, uI.url, uI.description, uI.likes, uI.tags);
+>>>>>>> e7421766975fbb20a95f9d71987801dc3ca8b336
         console.log('Document written with ID: ', docRef.id);
       });
   }

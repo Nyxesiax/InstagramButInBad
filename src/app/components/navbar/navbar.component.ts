@@ -21,15 +21,4 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
   }
-
-/*  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
-    if (window.pageYOffset >= 550) {
-      const element = document.getElementById('navbar');
-      element.classList.add('sticky');
-    } else {
-      const element = document.getElementById('navbar');
-      element.classList.remove('sticky');
-    }
-  } */
 }
