@@ -5,6 +5,7 @@ import {DetailWindowService} from '../../Service/detail-window.service';
 import {Post} from '../../models/post';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {UsersService} from '../../Service/users.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class DashboardComponent implements OnInit {
     public users: Users,
     public router: Router,
     public authentification: AuthenticationService,
-    public detailWindowService: DetailWindowService
+    public detailWindowService: DetailWindowService,
+    public userService: UsersService
   ) {
   }
   ngOnInit() {
@@ -51,5 +53,9 @@ export class DashboardComponent implements OnInit {
 
   signOut() {
     return this.authentification.SignOut();
+  }
+
+  switchToUserProfile(event: any) {
+    return this.userService.switchToUserProfile(event, this.users.email);
   }
 }

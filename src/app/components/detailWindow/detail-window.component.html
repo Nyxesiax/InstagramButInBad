@@ -1,8 +1,7 @@
 <body>
 <div>
- <h5>{{activePost.owner}}</h5>
+ <h5 (click)="switchToUserProfile()">{{activePost.owner}}</h5>
 
-<form [formGroup]="commentForm"></form>
 <img [src]="activePost.picture.URL">
 
 <h5>Likes: {{activePost.picture.likes}}</h5>

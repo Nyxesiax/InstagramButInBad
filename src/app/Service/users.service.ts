@@ -46,4 +46,12 @@ export class UsersService {
   } */
 
 
+  switchToUserProfile(event: any, username: string) {
+    this.router.navigate(['/userProfile']);
+    if (event.target.value === username) {
+      return console.log(event.target.value);
+    } else {
+      return console.log(event.target.value);
+    }
+  }
 }
