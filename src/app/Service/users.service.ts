@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
+import {Users} from '../models/users';
+import {Post} from '../models/post';
 
 
 @Injectable({
@@ -9,11 +11,14 @@ import {Router} from '@angular/router';
 })
 
 export class UsersService {
-  users: Observable<any>;
+  posts: Observable<Post[]>;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private af: AngularFirestore, public router: Router) {
-    this.users = af.collection('Users').valueChanges({ idField: 'id' });
+  constructor(private af: AngularFirestore, public router: Router, public user: Users) {
+    const postOfOwner = this.af.collection('posts', ref => {
+      return ref.where('owner', '==', this.user.email);
+    }).valueChanges({ idField: 'id' });
+    this.posts = postOfOwner as any as Observable<Post[]>;
   }
 /*
   del(user: Users) {
@@ -46,12 +51,11 @@ export class UsersService {
   } */
 
 
-  switchToUserProfile(event: any, username: string) {
-    this.router.navigate(['/userProfile']);
-    if (event.target.value === username) {
-      return console.log(event.target.value);
-    } else {
-      return console.log(event.target.value);
-    }
+  switchToUserProfile() {
+    this.router.navigateByUrl('/userProfile');
+  }
+
+  ownerPosts() {
+    return this.posts;
   }
 }

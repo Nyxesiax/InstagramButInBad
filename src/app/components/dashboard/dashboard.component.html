@@ -1,4 +1,4 @@
-<h1 class="mt-5" (click)="switchToUserProfile($event)">{{users.email}}</h1>
+<h1 class="mt-5" (click)="switchToUserProfile()">{{users.email}}</h1>
 
 <body (scroll)="onWindowScroll($event)">
 <div class="container">
@@ -13,7 +13,7 @@
 
         <div *ngFor="let pic of posts | async; let i = index" class="col-12 col-sm-6 col-lg-4 post card" style="width: 18rem;">
           <div class="card-header">
-            <h5 (click)="switchToUserProfile($event)">{{pic.owner}}</h5>
+            <h5>{{pic.owner}}</h5>
           </div>
           <img class="card-img-top" [src]="pic.picture.URL" (click)="showDetails(pic)" alt="Card image cap">
           <div class="card-body">

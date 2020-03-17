@@ -1,6 +1,6 @@
 <body>
 <div>
- <h5 (click)="switchToUserProfile()">{{activePost.owner}}</h5>
+ <h5 (click)="switchToUserProfile($event)">{{activePost.owner}}</h5>
 
 <img [src]="activePost.picture.URL">
 

@@ -35,14 +35,14 @@ export class DashboardComponent implements OnInit {
     await this.picturesService.like();
   }
 
-  async likesUp(pic: Post) {
-    pic.picture.likes++;
-    await this.picturesService.updatePicture(pic);
+  async likesUp(post: Post) {
+    post.picture.likes++;
+    await this.picturesService.updatePicture(post);
   }
 
-  async likesDown(pic: Post) {
-    pic.picture.likes--;
-    await this.picturesService.updatePicture(pic);
+  async likesDown(post: Post) {
+    post.picture.likes--;
+    await this.picturesService.updatePicture(post);
   }
 
   showDetails(picObject) {
@@ -52,10 +52,10 @@ export class DashboardComponent implements OnInit {
   }
 
   signOut() {
-    return this.authentification.SignOut();
+    return this.authentification.signOut();
   }
 
-  switchToUserProfile(event: any) {
-    return this.userService.switchToUserProfile(event, this.users.email);
+  switchToUserProfile() {
+    return this.userService.switchToUserProfile();
   }
 }

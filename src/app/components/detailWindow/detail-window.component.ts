@@ -41,7 +41,7 @@ export class DetailWindowComponent implements OnInit {
     this.postService.manageComments(this.detailWindowsService.activePost, this.users.email, this.picComment);
   }
 
-  switchToUserProfile() {
-    this.userService.switchToUserProfile();
+  switchToUserProfile(event: any) {
+    this.userService.switchToUserProfile(event);
   }
 }
