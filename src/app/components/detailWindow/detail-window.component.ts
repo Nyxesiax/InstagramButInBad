@@ -1,10 +1,9 @@
-
 import { DetailWindowService } from '../../Service/detail-window.service';
-import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/Service/post.service';
 import { Users } from 'src/app/models/users';
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UsersService} from '../../Service/users.service';
 
 @Component({
   selector: 'app-detail-window',
@@ -13,14 +12,14 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class DetailWindowComponent implements OnInit {
 
-  commentForm: FormGroup;
   picComment: string;
 
   constructor(
     public detailWindowsService: DetailWindowService,
     public postService: PostService,
     public users: Users,
-    public fb: FormBuilder
+    public router: Router,
+    public userService: UsersService
   ) { }
 
   ngOnInit() {
@@ -30,15 +29,15 @@ export class DetailWindowComponent implements OnInit {
     return this.detailWindowsService.activePost;
   }
 
-  get post(): Post {
-    return this.detailWindowsService.post;
-  }
-
   loadComments() {
     this.detailWindowsService.loadCommentsFromPicture();
   }
 
   manageComment() {
     this.postService.manageComments(this.detailWindowsService.activePost, this.users.email, this.picComment);
+  }
+
+  async switchToUserProfile() {
+    this.userService.switchToUserProfile();
   }
 }

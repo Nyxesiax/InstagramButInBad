@@ -38,7 +38,11 @@ const appRoutes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
+  },
+  {
+    path: 'userProfile',
+    component: UserProfileComponent
   },
   {
     path: '',

@@ -5,6 +5,7 @@ import {DetailWindowService} from '../../Service/detail-window.service';
 import {Post} from '../../models/post';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {UsersService} from '../../Service/users.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class DashboardComponent implements OnInit {
     public users: Users,
     public router: Router,
     public authentification: AuthenticationService,
-    public detailWindowService: DetailWindowService
+    public detailWindowService: DetailWindowService,
+    public userService: UsersService
   ) {
   }
   ngOnInit() {
@@ -33,14 +35,14 @@ export class DashboardComponent implements OnInit {
     await this.picturesService.like();
   }
 
-  async likesUp(pic: Post) {
-    pic.picture.likes++;
-    await this.picturesService.updatePicture(pic);
+  async likesUp(post: Post) {
+    post.picture.likes++;
+    await this.picturesService.updatePicture(post);
   }
 
-  async likesDown(pic: Post) {
-    pic.picture.likes--;
-    await this.picturesService.updatePicture(pic);
+  async likesDown(post: Post) {
+    post.picture.likes--;
+    await this.picturesService.updatePicture(post);
   }
 
   showDetails(picObject) {
@@ -50,6 +52,10 @@ export class DashboardComponent implements OnInit {
   }
 
   signOut() {
-    return this.authentification.SignOut();
+    return this.authentification.signOut();
+  }
+
+  switchToUserProfile() {
+    return this.userService.switchToUserProfile();
   }
 }

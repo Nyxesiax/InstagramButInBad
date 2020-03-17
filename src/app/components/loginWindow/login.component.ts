@@ -49,6 +49,6 @@ export class LoginComponent {
   }
 
   googleAuth() {
-    return this.authService.GoogleAuth();
+    return this.authService.googleAuth();
   }
 }
