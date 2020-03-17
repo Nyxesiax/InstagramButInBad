@@ -1,8 +1,8 @@
 import { DetailWindowService } from '../../Service/detail-window.service';
-import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/Service/post.service';
 import { Users } from 'src/app/models/users';
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {UsersService} from '../../Service/users.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class DetailWindowComponent implements OnInit {
     public detailWindowsService: DetailWindowService,
     public postService: PostService,
     public users: Users,
+    public router: Router,
     public userService: UsersService
   ) { }
 
@@ -37,6 +38,6 @@ export class DetailWindowComponent implements OnInit {
   }
 
   async switchToUserProfile() {
-    await this.userService.switchToUserProfile();
+    this.userService.switchToUserProfile();
   }
 }
