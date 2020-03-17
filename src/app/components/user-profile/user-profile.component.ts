@@ -20,7 +20,9 @@ export class UserProfileComponent implements OnInit {
               public router: Router,
               public picturesService: PicturesService,
               public authentification: AuthenticationService
-  ) { }
+  ) {
+    this.userService.loadPostsOfOwner();
+  }
   ngOnInit() {
   }
 

@@ -3,7 +3,6 @@ import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/Service/post.service';
 import { Users } from 'src/app/models/users';
 import {Component, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
 import {UsersService} from '../../Service/users.service';
 
 @Component({
@@ -29,10 +28,6 @@ export class DetailWindowComponent implements OnInit {
     return this.detailWindowsService.activePost;
   }
 
-  get post(): Post {
-    return this.detailWindowsService.post;
-  }
-
   loadComments() {
     this.detailWindowsService.loadCommentsFromPicture();
   }
@@ -41,7 +36,7 @@ export class DetailWindowComponent implements OnInit {
     this.postService.manageComments(this.detailWindowsService.activePost, this.users.email, this.picComment);
   }
 
-  switchToUserProfile(event: any) {
-    this.userService.switchToUserProfile(event);
+  async switchToUserProfile() {
+    await this.userService.switchToUserProfile();
   }
 }

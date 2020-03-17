@@ -1,6 +1,13 @@
 <body>
 <div>
- <h5 (click)="switchToUserProfile($event)">{{activePost.owner}}</h5>
+ <div *ngIf="activePost.owner == this.users.email; else notClick">
+
+   <h5 >{{activePost.owner}}</h5>
+   </div>
+   <ng-template #notClick>
+     <h5 (click)="switchToUserProfile()">{{activePost.owner}}</h5>
+   </ng-template>
+
 
 <img [src]="activePost.picture.URL">
 

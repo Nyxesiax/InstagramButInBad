@@ -15,10 +15,7 @@ export class UsersService {
 
   // tslint:disable-next-line:max-line-length
   constructor(private af: AngularFirestore, public router: Router, public user: Users) {
-    const postOfOwner = this.af.collection('posts', ref => {
-      return ref.where('owner', '==', this.user.email);
-    }).valueChanges({ idField: 'id' });
-    this.posts = postOfOwner as any as Observable<Post[]>;
+    this.loadPostsOfOwner();
   }
 /*
   del(user: Users) {
@@ -49,10 +46,15 @@ export class UsersService {
         return false;
       }
   } */
+  loadPostsOfOwner() {
+    const postOfOwner = this.af.collection('posts', ref => {
+      return ref.where('owner', '==', this.user.email);
+    }).valueChanges({ idField: 'id' });
+    this.posts = postOfOwner as any as Observable<Post[]>;
+  }
 
-
-  switchToUserProfile() {
-    this.router.navigateByUrl('/userProfile');
+  async switchToUserProfile() {
+   await this.router.navigateByUrl('/userProfile');
   }
 
   ownerPosts() {

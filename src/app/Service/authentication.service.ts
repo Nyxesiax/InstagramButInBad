@@ -40,7 +40,6 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         this.userbla.email = res.user.email;
-        alert(this.userbla.email);
         console.log('You are Successfully logged in!');
         this.router.navigateByUrl('/dashboard');
       })
@@ -88,7 +87,7 @@ export class AuthenticationService {
     });
   }
 
-  signOut() {
+  async signOut() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.angularFireAuth.auth.signOut();
