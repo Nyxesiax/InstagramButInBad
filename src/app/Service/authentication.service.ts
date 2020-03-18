@@ -96,7 +96,7 @@ export class AuthenticationService {
       } else {
         try {
           return this.angularFireAuth.auth.signOut().then(() => {
-            localStorage.removeItem('user');
+            window.localStorage.removeItem('firebase:session::<host-name>');
             this.router.navigateByUrl('');
           });
         } catch (e) {
