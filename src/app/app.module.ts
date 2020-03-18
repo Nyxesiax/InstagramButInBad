@@ -18,9 +18,46 @@ import { AngularFireModule } from '@angular/fire';
 import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {Users} from './models/users';
+import {AuthGuardGuard} from './AuthGuard/auth-guard.guard';
 
 const appRoutes: Routes = [
+
   {
+    path: 'user',
+    component: NavbarComponent,
+    canActivate: [AuthGuardGuard],
+    children: [
+      {
+        path: 'uploadImage',
+        component: UploadImageComponent
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'detailWindow',
+        component: DetailWindowComponent
+      },
+      {
+        path: 'userProfile',
+        component: UserProfileComponent
+      }
+    ]
+  },
+  {
+    path: 'startScreen',
+    component: StartScreenComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    component: StartScreenComponent
+  }
+ /* {
     path: 'startScreen',
     component: StartScreenComponent
   },
@@ -47,8 +84,7 @@ const appRoutes: Routes = [
   {
     path: '',
     component: StartScreenComponent
-  } // ,
-  // { path: '**', component: PageNotFoundComponent }
+  } */
 ];
 
 @NgModule({
@@ -63,6 +99,8 @@ const appRoutes: Routes = [
     UserProfileComponent
   ],
   imports: [
+   // RouterModule.forChild(
+    //  appRoutes),
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: false}),

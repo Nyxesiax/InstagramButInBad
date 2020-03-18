@@ -2,9 +2,10 @@ import * as firebase from 'firebase';
 import {Users} from '../models/users';
 import {auth} from 'firebase';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {delay, tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,9 @@ import {AngularFireAuth} from '@angular/fire/auth';
 
 export class AuthenticationService {
   userData: Observable<firebase.User>;
+
+  isLoggedIn = false;
+  redirectUrl: string;
 
   constructor(public angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
     this.userData = angularFireAuth.authState;
@@ -117,9 +121,20 @@ export class AuthenticationService {
       .then((result) => {
         console.log('You have been successfully logged in!' + JSON.stringify(result));
         this.userbla.email = result.user.email;
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/user/dashboard');
       }).catch((error) => {
         console.log(error);
       });
+  }
+
+  login(): Observable<boolean> {
+    return of(true).pipe(
+      delay(1000),
+      tap(val => this.isLoggedIn = true)
+    );
+  }
+
+  logout(): void {
+    this.isLoggedIn = false;
   }
 }
