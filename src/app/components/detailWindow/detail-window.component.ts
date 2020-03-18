@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { DetailWindowService } from '../../Service/detail-window.service';
-import { Observable } from 'rxjs';
-import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/Service/post.service';
 import { Users } from 'src/app/models/users';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {UsersService} from '../../Service/users.service';
 
 @Component({
   selector: 'app-detail-window',
@@ -17,18 +17,16 @@ export class DetailWindowComponent implements OnInit {
   constructor(
     public detailWindowsService: DetailWindowService,
     public postService: PostService,
-    public users: Users
+    public users: Users,
+    public router: Router,
+    public userService: UsersService
   ) { }
 
   ngOnInit() {
   }
 
-  get activePicture() {
-    return this.detailWindowsService.activePicture;
-  }
-
-  get post(): Post {
-    return this.detailWindowsService.post;
+  get activePost() {
+    return this.detailWindowsService.activePost;
   }
 
   loadComments() {
@@ -36,7 +34,10 @@ export class DetailWindowComponent implements OnInit {
   }
 
   manageComment() {
-    this.postService.manageComments(this.users.email, this.picComment, this.activePicture.URL, this.activePicture.likes);
+    this.postService.manageComments(this.detailWindowsService.activePost, this.users.email, this.picComment);
   }
 
+  async switchToUserProfile() {
+    this.userService.switchToUserProfile();
+  }
 }

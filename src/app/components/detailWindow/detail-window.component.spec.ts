@@ -1,6 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DetailWindowComponent } from './detail-window.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 describe('DetailWindowComponent', () => {
   let component: DetailWindowComponent;

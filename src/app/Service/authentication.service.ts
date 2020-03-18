@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import {Router} from '@angular/router';
 import * as firebase from 'firebase';
 import {Users} from '../models/users';
+import {auth} from 'firebase';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthenticationService {
   }
 
   /* Sign up */
-  SignUp(email: string, password: string) {
+  signUp(email: string, password: string) {
     this.angularFireAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
@@ -31,7 +32,7 @@ export class AuthenticationService {
   }
 
   /* Sign in */
-  SignIn(email: string, password: string) {
+  signIn(email: string, password: string) {
     console.log('email: ' + email);
     console.log('pass: ' + password);
     this.angularFireAuth
@@ -39,7 +40,6 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         this.userbla.email = res.user.email;
-        alert(this.userbla.email);
         console.log('You are Successfully logged in!');
         this.router.navigateByUrl('/dashboard');
       })
@@ -87,7 +87,7 @@ export class AuthenticationService {
     });
   }
 
-  SignOut() {
+  async signOut() {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.angularFireAuth.auth.signOut();
@@ -96,7 +96,7 @@ export class AuthenticationService {
       } else {
         try {
           return this.angularFireAuth.auth.signOut().then(() => {
-            localStorage.removeItem('user');
+            window.localStorage.removeItem('firebase:session::<host-name>');
             this.router.navigateByUrl('');
           });
         } catch (e) {
@@ -106,4 +106,20 @@ export class AuthenticationService {
     });
   }
 
+  // Sign in with Google
+  googleAuth() {
+    return this.authLogin(new auth.GoogleAuthProvider());
+  }
+
+  // Auth logic to run auth providers
+  authLogin(provider) {
+    return this.angularFireAuth.auth.signInWithPopup(provider)
+      .then((result) => {
+        console.log('You have been successfully logged in!' + JSON.stringify(result));
+        this.userbla.email = result.user.email;
+        this.router.navigateByUrl('/dashboard');
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
 }

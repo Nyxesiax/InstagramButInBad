@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+
 import {Pictures} from '../models/pictures';
 import {PicComment} from '../models/pic.comment';
 import {Post} from '../models/post';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {PicturesService} from './pictures.service';
-import { DetailWindowService } from './detail-window.service';
+import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,32 +13,25 @@ import { DetailWindowService } from './detail-window.service';
 export class PostService {
 
   constructor(
-    public af: AngularFirestore,
-    public pictureService: PicturesService,
-    public detailWindowService: DetailWindowService
-  ) { }
+    public af: AngularFirestore
+  ) {
+    this.posts = this.af.collection('posts').valueChanges({ idField: 'id' }) as any as Observable<Post[]>;
+  }
+  public posts: Observable<Post[]>;
 
-  public postId: string;
 
-  private commentArray: PicComment[] = [];
-
-  createPost(id: string, description: string, url: string, likes: number) {
+  createPost(id: string, url: string, description: string, likes: number, owner: string) {
     const pic = new Pictures(id, url, description, likes, Date.now().toString());
-    this.commentArray.push(new PicComment(null, null));
-    const p = new Post(pic, this.commentArray);
-    this.af.collection('posts').add(JSON.parse(JSON.stringify(p))).then(docRef => {
-      this.postId = docRef.id;
-    });
+    const p = new Post(owner , pic, []);
+    this.af.collection('posts').add(JSON.parse(JSON.stringify(p)));
   }
 
-  manageComments(user: string, text: string, url: string, likes: number) {
-    const pic = new Pictures(this.detailWindowService.activePicture.id, url, text, likes, Date.now().toString());
-    this.commentArray.push(new PicComment(user, text));
-    const p = new Post(pic, this.commentArray);
-    this.af.collection('posts').doc(
-       this.postId).set({
-        comments: JSON.parse(JSON.stringify(this.commentArray)),
-        picture: JSON.parse(JSON.stringify(pic))
+  manageComments(post: Post, user: string, text: string) {
+    post.comments.push(new PicComment(user, text));
+    this.af.collection('posts').doc(post.id
+       ).update({
+        comments: JSON.parse(JSON.stringify(post.comments)),
+        picture: JSON.parse(JSON.stringify(post.picture))
       }
     );
    }

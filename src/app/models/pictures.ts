@@ -1,3 +1,4 @@
+
 export class Pictures {
 
   constructor(
@@ -5,7 +6,8 @@ export class Pictures {
     public URL?: string,
     public description?: string,
     public likes?: number,
-    public timestamp?: string
+    public timestamp?: string,
+    public tags?: string
   ) {
   }
 }

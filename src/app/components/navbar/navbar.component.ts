@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../../Service/authentication.service';
 
 
 @Component({
@@ -7,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
  /* searchterm: string;
 
   startAt = new Subject();
@@ -18,9 +18,12 @@ export class NavbarComponent implements OnInit {
 
   startobs = this.startAt.asObservable();
   endobs = this.endAt.asObservable(); */
-  constructor() { }
+  constructor(public authService: AuthenticationService) {}
+
+  signOut() {
+    this.authService.signOut();
+  }
 
   ngOnInit() {
   }
-
 }

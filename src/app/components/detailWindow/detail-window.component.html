@@ -1,21 +1,32 @@
-<img [src]="activePicture.URL">
+<body>
+<div>
+ <div *ngIf="activePost.owner == this.users.email; else notClick">
+   <h5 (click)="switchToUserProfile()">{{activePost.owner}}</h5>
 
-<p>Pic ID: {{activePicture.id}}</p>
-<p>Likes: {{activePicture.likes}}</p>
+   </div>
+   <ng-template #notClick>
+     <h5 >{{activePost.owner}}</h5>
+   </ng-template>
 
-<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+
+<img [src]="activePost.picture.URL">
+
+<h5>Likes: {{activePost.picture.likes}}</h5>
+
+<input type="text" class="form-control" id="comment"
   placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
 <button (click)="manageComment()" class="btn btn-outline-success" style="margin-left:5px;">comment</button>
-
+</div>
 <table class="table table-responsive table-hover">
   <thead>
     <th>Benutzer</th>
     <th>Kommentar</th>
   </thead>
   <tbody>
-    <tr *ngFor="let c of post.comments">
+    <tr *ngFor="let c of activePost.comments">
       <td>{{ c.author }}</td>
       <td>{{ c.text }}</td>
     </tr>
   </tbody>
 </table>
+</body>

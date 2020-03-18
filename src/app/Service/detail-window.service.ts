@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {HostListener, Injectable} from '@angular/core';
 import { Pictures } from '../models/pictures';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { Post } from '../models/post';
 })
 export class DetailWindowService {
 
-  activePicture: Pictures;
+  activePost: Post;
   post: Post;
 
   constructor(
@@ -19,14 +19,14 @@ export class DetailWindowService {
   }
 
   loadCommentsFromPicture() {
-    if (this.activePicture) {
+    if (this.activePost) {
       // Daten abfragen
 
-      const posts = this.afs.collection('posts', ref => ref.where('picture.id', '==', this.activePicture.id))
+      const posts = this.afs.collection('posts')
         .valueChanges({ idField: 'id' }) as any as Observable<Post>;
       posts.subscribe(postsArr => {
-        this.post = postsArr[0];
-        console.table(this.post.comments);
+        this.post = postsArr;
+        console.table(this.activePost.comments);
       });
     } else {
       console.log('FEHLER: Kein Bild zum laden von Kommentaren ausgewählt!');
