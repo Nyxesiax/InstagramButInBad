@@ -1,5 +1,4 @@
-import {HostListener, Injectable} from '@angular/core';
-import { Pictures } from '../models/pictures';
+import {Injectable} from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Post } from '../models/post';

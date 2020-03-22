@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {delay, tap} from "rxjs/operators";
+import {delay, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -121,7 +121,7 @@ export class AuthenticationService {
       .then((result) => {
         console.log('You have been successfully logged in!' + JSON.stringify(result));
         this.userbla.email = result.user.email;
-        this.router.navigateByUrl('/user/dashboard');
+        this.router.navigateByUrl('/dashboard');
       }).catch((error) => {
         console.log(error);
       });
@@ -136,5 +136,13 @@ export class AuthenticationService {
 
   logout(): void {
     this.isLoggedIn = false;
+  }
+
+  isAuthenticated(): boolean {
+    if (firebase.auth().currentUser) {
+    return true;
+    } else {
+      return false;
+    }
   }
 }

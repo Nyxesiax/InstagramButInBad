@@ -22,7 +22,7 @@ import {AuthGuardGuard} from './AuthGuard/auth-guard.guard';
 
 const appRoutes: Routes = [
 
-  {
+ /* {
     path: 'user',
     component: NavbarComponent,
     canActivate: [AuthGuardGuard],
@@ -56,22 +56,25 @@ const appRoutes: Routes = [
   {
     path: '',
     component: StartScreenComponent
-  }
- /* {
+  } */
+  {
     path: 'startScreen',
     component: StartScreenComponent
   },
   {
     path: 'uploadImage',
-    component: UploadImageComponent
+    component: UploadImageComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'detailWindow',
-    component: DetailWindowComponent
+    component: DetailWindowComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'login',
@@ -79,12 +82,13 @@ const appRoutes: Routes = [
   },
   {
     path: 'userProfile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: '',
     component: StartScreenComponent
-  } */
+  }
 ];
 
 @NgModule({
