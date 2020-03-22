@@ -15,7 +15,6 @@ export class AuthenticationService {
   userData: Observable<firebase.User>;
 
   isLoggedIn = false;
-  redirectUrl: string;
 
   constructor(public angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
     this.userData = angularFireAuth.authState;
@@ -127,7 +126,7 @@ export class AuthenticationService {
       });
   }
 
-  login(): Observable<boolean> {
+ /* login(): Observable<boolean> {
     return of(true).pipe(
       delay(1000),
       tap(val => this.isLoggedIn = true)
@@ -136,7 +135,7 @@ export class AuthenticationService {
 
   logout(): void {
     this.isLoggedIn = false;
-  }
+  } */
 
   isAuthenticated(): boolean {
     if (firebase.auth().currentUser) {

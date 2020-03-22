@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
+  <img src="../../../assets/Main_icon.png" height="3%" width="3%"/>
   <a class="navbar-brand" href="#">Instagram but in bad</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +20,9 @@
         <!-- <a class="nav-link" href="#" tabindex="-1" aria-disabled="false">Upload</a> -->
         <a class="nav-link" routerLink="/uploadImage" routerLinkActive="active">Upload</a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/startScreen" routerLinkActive="active" (click)="signOut()">Sign out</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <label>
@@ -28,7 +32,7 @@
         <li>{{username.username}}</li>
       </ul>
       <div *ngIf="username?.length < 1">
-        <p>Sorry, no user found</p>
+       <!-- <p>Sorry, no user found</p> -->
       </div>
       <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
       <button type="button" class="btn btn-light">Search</button>

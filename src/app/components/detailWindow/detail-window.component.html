@@ -13,9 +13,7 @@
 
 <h5>Likes: {{activePost.picture.likes}}</h5>
 
-<input type="text" class="form-control" id="comment"
-  placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
-<button (click)="manageComment()" class="btn btn-outline-success" style="margin-left:5px;">comment</button>
+
 </div>
 <table class="table table-responsive table-hover">
   <thead>
@@ -28,5 +26,10 @@
       <td>{{ c.text }}</td>
     </tr>
   </tbody>
+  <tfoot>
+  <input type="text" class="form-control" id="comment"
+         placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
+    <button (click)="manageComment()" class="btn btn-outline-success" style="margin-left:5px;">comment</button>
+  </tfoot>
 </table>
 </body>
