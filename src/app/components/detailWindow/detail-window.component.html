@@ -1,4 +1,4 @@
-<body style="text-align: center">
+<body>
 <div>
  <div *ngIf="activePost.owner == this.users.email; else notClick">
    <h5 (click)="switchToUserProfile()">{{activePost.owner}}</h5>
@@ -13,9 +13,9 @@
 
 <h5>Likes: {{activePost.picture.likes}}</h5>
 
-<input type="text" class="form-control" id="comment" style="width: 20%; display: inline-block"
+<input type="text" class="form-control" id="comment"
   placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
-<button (click)="manageComment()" class="btn btn-outline-success" style="display: inline-block">comment</button>
+<button (click)="manageComment()" class="btn btn-outline-success" style="margin-left:5px;">comment</button>
 </div>
 <table class="table table-responsive table-hover">
   <thead>
