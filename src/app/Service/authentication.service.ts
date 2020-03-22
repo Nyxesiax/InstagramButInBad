@@ -2,9 +2,10 @@ import * as firebase from 'firebase';
 import {Users} from '../models/users';
 import {auth} from 'firebase';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {delay, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,9 @@ import {AngularFireAuth} from '@angular/fire/auth';
 
 export class AuthenticationService {
   userData: Observable<firebase.User>;
+
+  isLoggedIn = false;
+  redirectUrl: string;
 
   constructor(public angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
     this.userData = angularFireAuth.authState;
@@ -96,7 +100,7 @@ export class AuthenticationService {
       } else {
         try {
           return this.angularFireAuth.auth.signOut().then(() => {
-            localStorage.removeItem('user');
+            window.localStorage.removeItem('firebase:session::<host-name>');
             this.router.navigateByUrl('');
           });
         } catch (e) {
@@ -121,5 +125,24 @@ export class AuthenticationService {
       }).catch((error) => {
         console.log(error);
       });
+  }
+
+  login(): Observable<boolean> {
+    return of(true).pipe(
+      delay(1000),
+      tap(val => this.isLoggedIn = true)
+    );
+  }
+
+  logout(): void {
+    this.isLoggedIn = false;
+  }
+
+  isAuthenticated(): boolean {
+    if (firebase.auth().currentUser) {
+    return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -18,7 +18,6 @@ export class StartScreenComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    public authService: AuthenticationService,
     private router: Router,
     private fb: FormBuilder
 ) {
