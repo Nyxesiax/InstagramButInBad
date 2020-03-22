@@ -6,37 +6,41 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <!--  <a  href="#">Home <span class="sr-only">(current)</span></a> -->
-        <a class="nav-link" routerLink="/startScreen" (click)="signOut()" routerLinkActive="active">Home</a>
-      </li>
-      <li class="nav-item active">
-        <!-- <a class="nav-link" href="#" tabindex="-1" aria-disabled="false">Upload</a> -->
-        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      </li>
-      <li class="nav-item active">
-        <!-- <a class="nav-link" href="#" tabindex="-1" aria-disabled="false">Upload</a> -->
-        <a class="nav-link" routerLink="/uploadImage" routerLinkActive="active">Upload</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/startScreen" routerLinkActive="active" (click)="signOut()">Sign out</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <label>
-        <input (keydown)="search($event)" [(ngModel)]="searchterm" type="text">
-      </label>
-      <ul *ngFor="let username of usernames">
-        <li>{{username.username}}</li>
+  <div *ngIf="isAuthenticated() == true; else nothing">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <!--  <a  href="#">Home <span class="sr-only">(current)</span></a> -->
+          <a class="nav-link" routerLink="/startScreen" (click)="signOut()" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item active">
+          <!-- <a class="nav-link" href="#" tabindex="-1" aria-disabled="false">Upload</a> -->
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        </li>
+        <li class="nav-item active">
+          <!-- <a class="nav-link" href="#" tabindex="-1" aria-disabled="false">Upload</a> -->
+          <a class="nav-link" routerLink="/uploadImage" routerLinkActive="active">Upload</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/startScreen" routerLinkActive="active" (click)="signOut()">Sign out</a>
+        </li>
       </ul>
-      <div *ngIf="username?.length < 1">
-       <!-- <p>Sorry, no user found</p> -->
-      </div>
-      <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-      <button type="button" class="btn btn-light">Search</button>
-    </form>
-
+      <form class="form-inline my-2 my-lg-0">
+        <label>
+          <input (keydown)="search($event)" [(ngModel)]="searchterm" type="text">
+        </label>
+        <ul *ngFor="let username of usernames">
+          <li>{{username.username}}</li>
+        </ul>
+        <div *ngIf="username?.length < 1">
+          <!-- <p>Sorry, no user found</p> -->
+        </div>
+        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+        <button type="button" class="btn btn-light">Search</button>
+      </form>
+    </div>
   </div>
 </nav>
+  <ng-template #nothing>
+  </ng-template>
+
