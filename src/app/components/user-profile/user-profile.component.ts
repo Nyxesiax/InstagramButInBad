@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
               public picturesService: PicturesService,
               public authentification: AuthenticationService
   ) {
-    this.userService.loadPostsOfOwner();
+    this.userService.loadPostsOfLoggedinOwner();
   }
   ngOnInit() {
   }

@@ -4,6 +4,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {Users} from '../models/users';
 import {Post} from '../models/post';
+import * as firebase from 'firebase';
+import {AngularFireAuth} from "@angular/fire/auth";
 
 
 @Injectable({
@@ -12,10 +14,10 @@ import {Post} from '../models/post';
 
 export class UsersService {
   posts: Observable<Post[]>;
+  userData: Observable<firebase.User>;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private af: AngularFirestore, public router: Router, public user: Users) {
-    this.loadPostsOfOwner();
+  constructor(private af: AngularFirestore, public angularFireAuth: AngularFireAuth, public router: Router, public user: Users) {
   }
 /*
   del(user: Users) {
@@ -46,7 +48,7 @@ export class UsersService {
         return false;
       }
   } */
-  loadPostsOfOwner() {
+  loadPostsOfLoggedinOwner() {
     const postOfOwner = this.af.collection('posts', ref => {
       return ref.where('owner', '==', this.user.email);
     }).valueChanges({ idField: 'id' });
@@ -58,6 +60,7 @@ export class UsersService {
   }
 
   ownerPosts() {
+    this.loadPostsOfLoggedinOwner();
     return this.posts;
   }
 }
