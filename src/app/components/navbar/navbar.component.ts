@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../Service/authentication.service';
+import {Users} from '../../models/users';
 
 
 @Component({
@@ -18,13 +19,14 @@ export class NavbarComponent implements OnInit {
 
   startobs = this.startAt.asObservable();
   endobs = this.endAt.asObservable(); */
-  constructor(public authService: AuthenticationService) {}
+  constructor(public authService: AuthenticationService, public user: Users) {}
 
   signOut() {
     this.authService.signOut();
   }
 
   isAuthenticated() {
+    console.log(this.authService.isAuthenticated());
     return this.authService.isAuthenticated();
   }
 

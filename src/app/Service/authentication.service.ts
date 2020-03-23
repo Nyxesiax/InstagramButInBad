@@ -5,20 +5,32 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {delay, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthenticationService {
-  userData: Observable<firebase.User>;
-
-  isLoggedIn = false;
 
   constructor(public angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
     this.userData = angularFireAuth.authState;
   }
+  userData: Observable<firebase.User>;
+
+  isLoggedIn = false;
+
+
+
+ /* login(): Observable<boolean> {
+    return of(true).pipe(
+      delay(1000),
+      tap(val => this.isLoggedIn = true)
+    );
+  }
+
+  logout(): void {
+    this.isLoggedIn = false;
+  } */
 
   /* Sign up */
   signUp(email: string, password: string) {
@@ -126,20 +138,9 @@ export class AuthenticationService {
       });
   }
 
- /* login(): Observable<boolean> {
-    return of(true).pipe(
-      delay(1000),
-      tap(val => this.isLoggedIn = true)
-    );
-  }
-
-  logout(): void {
-    this.isLoggedIn = false;
-  } */
-
   isAuthenticated(): boolean {
     if (firebase.auth().currentUser) {
-    return true;
+      return true;
     } else {
       return false;
     }
