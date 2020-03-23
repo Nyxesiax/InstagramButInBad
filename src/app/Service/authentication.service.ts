@@ -16,12 +16,12 @@ export class AuthenticationService {
     this.userData = angularFireAuth.authState;
   }
   userData: Observable<firebase.User>;
-
+ /*
   isLoggedIn = false;
 
 
 
- /* login(): Observable<boolean> {
+  login(): Observable<boolean> {
     return of(true).pipe(
       delay(1000),
       tap(val => this.isLoggedIn = true)

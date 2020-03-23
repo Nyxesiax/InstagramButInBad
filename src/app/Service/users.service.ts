@@ -60,11 +60,11 @@ export class UsersService {
       this.posts = postOfOwner as any as Observable<Post[]>;
     }
   }
-
+/*
   async switchToUserProfile() {
    await this.router.navigateByUrl('/userProfile');
   }
-
+ */
   ownerPosts() {
     return this.posts;
   }

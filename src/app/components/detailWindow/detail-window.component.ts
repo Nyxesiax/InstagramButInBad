@@ -4,7 +4,7 @@ import { Users } from 'src/app/models/users';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UsersService} from '../../Service/users.service';
-import {Post} from "../../models/post";
+import {Post} from '../../models/post';
 
 @Component({
   selector: 'app-detail-window',
@@ -37,10 +37,10 @@ export class DetailWindowComponent implements OnInit {
   manageComment() {
     this.postService.manageComments(this.detailWindowsService.activePost, this.users.email, this.picComment);
   }
-
+ /*
   async switchToUserProfile() {
     this.userService.switchToUserProfile();
-  }
+  } */
 
   getUserOfPost(postOwner: Post) {
     this.userService.ownerOfPost = postOwner.owner;
