@@ -49,10 +49,10 @@ export class DashboardComponent implements OnInit {
     this.detailWindowService.loadCommentsFromPicture();
     this.router.navigateByUrl('/detailWindow');
   }
-
+/*
   switchToUserProfile() {
     return this.userService.switchToUserProfile();
-  }
+  } */
 
   getUserOfPost(postOwner: Post) {
     this.userService.ownerOfPost = postOwner.owner;
