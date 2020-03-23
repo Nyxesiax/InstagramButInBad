@@ -5,7 +5,6 @@ import {DetailWindowService} from '../../Service/detail-window.service';
 import {Router} from '@angular/router';
 import {Post} from '../../models/post';
 import {PicturesService} from '../../Service/pictures.service';
-import {AuthenticationService} from '../../Service/authentication.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,12 +15,11 @@ export class UserProfileComponent implements OnInit {
 
   constructor(public user: Users,
               public userService: UsersService,
-              public detailwindow: DetailWindowService,
+              public detailWindow: DetailWindowService,
               public router: Router,
-              public picturesService: PicturesService,
-              public authentification: AuthenticationService
+              public picturesService: PicturesService
   ) {
-    this.userService.loadPostsOfOwner();
+    this.userService.loadPostsOfLoggedinOwner();
   }
   ngOnInit() {
   }
@@ -31,8 +29,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   showDetails(postObject) {
-    this.detailwindow.activePost = postObject;
-    this.detailwindow.loadCommentsFromPicture();
+    this.detailWindow.activePost = postObject;
+    this.detailWindow.loadCommentsFromPicture();
     this.router.navigateByUrl('/detailWindow');
   }
 
@@ -44,9 +42,5 @@ export class UserProfileComponent implements OnInit {
   async likesDown(post: Post) {
     post.picture.likes--;
     await this.picturesService.updatePicture(post);
-  }
-
-  signOut() {
-    return this.authentification.signOut();
   }
 }

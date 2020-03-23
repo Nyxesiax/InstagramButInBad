@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
     public picturesService: PicturesService,
     public users: Users,
     public router: Router,
-    public authentification: AuthenticationService,
     public detailWindowService: DetailWindowService,
     public userService: UsersService
   ) {
@@ -51,12 +50,13 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/detailWindow');
   }
 
-  signOut() {
-    this.authentification.logout();
-    return this.authentification.signOut();
-  }
-
   switchToUserProfile() {
     return this.userService.switchToUserProfile();
+  }
+
+  getUserOfPost(postOwner: Post) {
+    this.userService.ownerOfPost = postOwner.owner;
+    console.log('Post owner:' + this.userService.ownerOfPost);
+    this.router.navigateByUrl('/userProfile');
   }
 }
