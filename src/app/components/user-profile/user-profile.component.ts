@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(public user: Users,
               public userService: UsersService,
-              public detailwindow: DetailWindowService,
+              public detailWindow: DetailWindowService,
               public router: Router,
               public picturesService: PicturesService
   ) {
@@ -29,8 +29,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   showDetails(postObject) {
-    this.detailwindow.activePost = postObject;
-    this.detailwindow.loadCommentsFromPicture();
+    this.detailWindow.activePost = postObject;
+    this.detailWindow.loadCommentsFromPicture();
     this.router.navigateByUrl('/detailWindow');
   }
 

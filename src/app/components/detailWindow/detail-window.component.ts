@@ -4,6 +4,7 @@ import { Users } from 'src/app/models/users';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UsersService} from '../../Service/users.service';
+import {Post} from "../../models/post";
 
 @Component({
   selector: 'app-detail-window',
@@ -39,5 +40,11 @@ export class DetailWindowComponent implements OnInit {
 
   async switchToUserProfile() {
     this.userService.switchToUserProfile();
+  }
+
+  getUserOfPost(postOwner: Post) {
+    this.userService.ownerOfPost = postOwner.owner;
+    console.log('Post owner:' + this.userService.ownerOfPost);
+    this.router.navigateByUrl('/userProfile');
   }
 }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../Service/authentication.service';
 import {Users} from '../../models/users';
+import {UsersService} from '../../Service/users.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class NavbarComponent implements OnInit {
 
   startobs = this.startAt.asObservable();
   endobs = this.endAt.asObservable(); */
-  constructor(public authService: AuthenticationService, public user: Users) {}
+  constructor(public authService: AuthenticationService, public user: Users, public userService: UsersService, public router: Router) {
+  }
 
   signOut() {
     this.authService.signOut();
@@ -28,6 +31,12 @@ export class NavbarComponent implements OnInit {
   isAuthenticated() {
     console.log(this.authService.isAuthenticated());
     return this.authService.isAuthenticated();
+  }
+
+  getUserOfPost() {
+    this.userService.ownerOfPost = this.user.email;
+    console.log('Post owner:' + this.userService.ownerOfPost);
+    this.router.navigateByUrl('/userProfile');
   }
 
   ngOnInit() {

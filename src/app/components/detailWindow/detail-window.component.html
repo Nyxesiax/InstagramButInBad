@@ -1,13 +1,7 @@
 <body style="text-align: center">
 <div>
- <div *ngIf="activePost.owner == this.users.email; else nothing">
-   <h5 (click)="switchToUserProfile()">{{activePost.owner}}</h5>
-
-   </div>
-   <ng-template #nothing>
-     <h5 >{{activePost.owner}}</h5>
-   </ng-template>
-<img [src]="activePost.picture.URL">
+    <h5 (click)="getUserOfPost(activePost)">{{activePost.owner}}</h5>
+    <img [src]="activePost.picture.URL">
 
 <h5>Likes: {{activePost.picture.likes}}</h5>
   </div>
