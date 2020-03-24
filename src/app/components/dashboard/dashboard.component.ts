@@ -1,6 +1,5 @@
 import { PicturesService } from 'src/app/Service/pictures.service';
 import {Users} from '../../models/users';
-import {AuthenticationService} from '../../Service/authentication.service';
 import {DetailWindowService} from '../../Service/detail-window.service';
 import {Post} from '../../models/post';
 import {Component, OnInit} from '@angular/core';
@@ -19,7 +18,6 @@ export class DashboardComponent implements OnInit {
     public picturesService: PicturesService,
     public users: Users,
     public router: Router,
-    public authentification: AuthenticationService,
     public detailWindowService: DetailWindowService,
     public userService: UsersService
   ) {
@@ -46,17 +44,19 @@ export class DashboardComponent implements OnInit {
   }
 
   showDetails(picObject) {
-    this.detailWindowService.activePost = picObject;
+   // this.detailWindowService.activePost = picObject;
+    this.detailWindowService.setActivePostInLocalStorage(JSON.stringify(picObject));
     this.detailWindowService.loadCommentsFromPicture();
     this.router.navigateByUrl('/detailWindow');
   }
-
-  signOut() {
-    this.authentification.logout();
-    return this.authentification.signOut();
-  }
-
+/*
   switchToUserProfile() {
     return this.userService.switchToUserProfile();
+  } */
+
+  getUserOfPost(postOwner: Post) {
+    this.userService.ownerOfPost = postOwner.owner;
+    console.log('Post owner:' + this.userService.ownerOfPost);
+    this.router.navigateByUrl('/userProfile');
   }
 }

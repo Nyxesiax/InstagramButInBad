@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {Users} from '../models/users';
 import {Post} from '../models/post';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 
 @Injectable({
@@ -12,10 +13,14 @@ import {Post} from '../models/post';
 
 export class UsersService {
   posts: Observable<Post[]>;
+  ownerOfPost: string;
+  postData: string;
 
-  // tslint:disable-next-line:max-line-length
-  constructor(private af: AngularFirestore, public router: Router, public user: Users) {
-    this.loadPostsOfOwner();
+  constructor(private af: AngularFirestore, public angularFireAuth: AngularFireAuth, public router: Router, public user: Users) {
+    this.postData = JSON.parse(localStorage.getItem('post'));
+    this.ownerOfPost = JSON.parse(JSON.stringify(this.postData));
+    this.ownerOfPost = JSON.parse(JSON.stringify(this.postData.owner));
+    console.log('Owner of post: ' + JSON.stringify(this.ownerOfPost));
   }
 /*
   del(user: Users) {
@@ -46,17 +51,25 @@ export class UsersService {
         return false;
       }
   } */
-  loadPostsOfOwner() {
-    const postOfOwner = this.af.collection('posts', ref => {
-      return ref.where('owner', '==', this.user.email);
-    }).valueChanges({ idField: 'id' });
-    this.posts = postOfOwner as any as Observable<Post[]>;
+  loadPostsOfLoggedinOwner() {
+    console.log('Postowner: ' + this.ownerOfPost);
+    if (this.ownerOfPost === this.user.email) {
+      const postOfOwner = this.af.collection('posts', ref => {
+        return ref.where('owner', '==', this.user.email);
+      }).valueChanges({ idField: 'id' });
+      this.posts = postOfOwner as any as Observable<Post[]>;
+    } else {
+      const postOfOwner = this.af.collection('posts', ref => {
+        return ref.where('owner', '==', this.ownerOfPost);
+      }).valueChanges({ idField: 'id' });
+      this.posts = postOfOwner as any as Observable<Post[]>;
+    }
   }
-
+/*
   async switchToUserProfile() {
    await this.router.navigateByUrl('/userProfile');
   }
-
+ */
   ownerPosts() {
     return this.posts;
   }

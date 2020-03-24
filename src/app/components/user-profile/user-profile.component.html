@@ -1,4 +1,4 @@
-<h1>{{user.email}}</h1>
+<h1>Profile of {{userService.ownerOfPost}}</h1>
 <div class="container">
   <div class="row">
     <!-- PicArray ASYNC durchgehen weil observable -->
@@ -24,9 +24,7 @@
       </div>
     </div>
 
-
     <!-- <p>Uploaded: {{pic.date | date:'short':'+0100' }}</p> -->
     <!-- https://www.angularjswiki.com/angular/angular-date-pipe-formatting-date-times-in-angular-with-examples/ -->
   </div>
-  <button type="submit" class="btn btn-primary" (click)="signOut()">Sign out</button>
 </div>

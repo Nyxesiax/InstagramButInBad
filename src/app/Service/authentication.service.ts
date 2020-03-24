@@ -5,21 +5,51 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {delay, tap} from 'rxjs/operators';
+import {DetailWindowService} from './detail-window.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthenticationService {
-  userData: Observable<firebase.User>;
 
-  isLoggedIn = false;
-  redirectUrl: string;
-
+  // tslint:disable-next-line:max-line-length
   constructor(public angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
     this.userData = angularFireAuth.authState;
+
+    /* Saving user data as an object in localstorage if logged out than set to null */
+    this.angularFireAuth.authState.subscribe(user => {
+      if (user) {
+        this.userDataTwo = user; // Setting up user data in userData var
+        localStorage.setItem('user', JSON.stringify(this.userDataTwo));
+        this.userDataThree = JSON.parse(localStorage.getItem('user'));
+        this.userbla.email = JSON.parse(JSON.stringify(this.userDataThree.email));
+      } else {
+        localStorage.setItem('user', null);
+        localStorage.setItem('activePost', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
+    });
   }
+
+  userDataThree: string;
+  userDataTwo: any;
+  userData: Observable<firebase.User>;
+ /*
+  isLoggedIn = false;
+
+
+
+  login(): Observable<boolean> {
+    return of(true).pipe(
+      delay(1000),
+      tap(val => this.isLoggedIn = true)
+    );
+  }
+
+  logout(): void {
+    this.isLoggedIn = false;
+  } */
 
   /* Sign up */
   signUp(email: string, password: string) {
@@ -95,13 +125,16 @@ export class AuthenticationService {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.angularFireAuth.auth.signOut();
+        localStorage.setItem('user', null);
+        localStorage.setItem('post', null);
         this.router.navigateByUrl('');
         resolve();
       } else {
         try {
           return this.angularFireAuth.auth.signOut().then(() => {
-            window.localStorage.removeItem('firebase:session::<host-name>');
-            this.router.navigateByUrl('');
+            localStorage.removeItem('user');
+            localStorage.removeItem('post');
+            this.router.navigateByUrl('login');
           });
         } catch (e) {
           reject();
@@ -127,20 +160,9 @@ export class AuthenticationService {
       });
   }
 
-  login(): Observable<boolean> {
-    return of(true).pipe(
-      delay(1000),
-      tap(val => this.isLoggedIn = true)
-    );
-  }
-
-  logout(): void {
-    this.isLoggedIn = false;
-  }
-
   isAuthenticated(): boolean {
     if (firebase.auth().currentUser) {
-    return true;
+      return true;
     } else {
       return false;
     }

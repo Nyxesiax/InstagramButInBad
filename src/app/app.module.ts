@@ -19,44 +19,9 @@ import { DetailWindowComponent } from './components/detailWindow/detail-window.c
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {Users} from './models/users';
 import {AuthGuardGuard} from './AuthGuard/auth-guard.guard';
+import {AuthenticationService} from "./Service/authentication.service";
 
 const appRoutes: Routes = [
-
- /* {
-    path: 'user',
-    component: NavbarComponent,
-    canActivate: [AuthGuardGuard],
-    children: [
-      {
-        path: 'uploadImage',
-        component: UploadImageComponent
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
-        path: 'detailWindow',
-        component: DetailWindowComponent
-      },
-      {
-        path: 'userProfile',
-        component: UserProfileComponent
-      }
-    ]
-  },
-  {
-    path: 'startScreen',
-    component: StartScreenComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: '',
-    component: StartScreenComponent
-  } */
   {
     path: 'startScreen',
     component: StartScreenComponent
@@ -117,7 +82,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [PicturesService, DataserviceService, UploadImageComponent, Users],
+  providers: [PicturesService, DataserviceService, UploadImageComponent, Users, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
