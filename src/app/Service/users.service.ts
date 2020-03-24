@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {Users} from '../models/users';
 import {Post} from '../models/post';
 import {AngularFireAuth} from '@angular/fire/auth';
-import * as firebase from 'firebase';
 
 
 @Injectable({
@@ -15,8 +14,13 @@ import * as firebase from 'firebase';
 export class UsersService {
   posts: Observable<Post[]>;
   ownerOfPost: string;
+  postData: string;
 
   constructor(private af: AngularFirestore, public angularFireAuth: AngularFireAuth, public router: Router, public user: Users) {
+    this.postData = JSON.parse(localStorage.getItem('post'));
+    this.ownerOfPost = JSON.parse(JSON.stringify(this.postData));
+    this.ownerOfPost = JSON.parse(JSON.stringify(this.postData.owner));
+    console.log('Owner of post: ' + JSON.stringify(this.ownerOfPost));
   }
 /*
   del(user: Users) {
@@ -48,6 +52,7 @@ export class UsersService {
       }
   } */
   loadPostsOfLoggedinOwner() {
+    console.log('Postowner: ' + this.ownerOfPost);
     if (this.ownerOfPost === this.user.email) {
       const postOfOwner = this.af.collection('posts', ref => {
         return ref.where('owner', '==', this.user.email);
