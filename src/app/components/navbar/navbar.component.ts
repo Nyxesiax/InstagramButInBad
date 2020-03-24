@@ -35,7 +35,6 @@ export class NavbarComponent implements OnInit {
 
   getUserOfPost() {
     this.userService.ownerOfPost = this.user.email;
-    console.log('Post owner:' + this.userService.ownerOfPost);
     this.router.navigateByUrl('/userProfile');
   }
 

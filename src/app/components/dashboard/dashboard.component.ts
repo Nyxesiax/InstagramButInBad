@@ -1,6 +1,5 @@
 import { PicturesService } from 'src/app/Service/pictures.service';
 import {Users} from '../../models/users';
-import {AuthenticationService} from '../../Service/authentication.service';
 import {DetailWindowService} from '../../Service/detail-window.service';
 import {Post} from '../../models/post';
 import {Component, OnInit} from '@angular/core';
@@ -47,6 +46,7 @@ export class DashboardComponent implements OnInit {
   showDetails(picObject) {
     this.detailWindowService.activePost = picObject;
     this.detailWindowService.loadCommentsFromPicture();
+    this.detailWindowService.setActivePostInLocalStorage(JSON.stringify(this.detailWindowService.activePost));
     this.router.navigateByUrl('/detailWindow');
   }
 /*
