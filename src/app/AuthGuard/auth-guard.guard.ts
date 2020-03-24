@@ -29,7 +29,7 @@ export class AuthGuardGuard implements CanActivate {
   } */
 
   canActivate(): boolean {
-    if (!this.authService.isAuthenticated()) {
+    if (!this.authService.isAuthenticated() && JSON.parse(localStorage.getItem('user')) === null) {
       alert('This page can only be accessed by logged in users. Please log in!');
       this.router.navigateByUrl('/login');
       return false;

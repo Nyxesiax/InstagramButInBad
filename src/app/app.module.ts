@@ -19,6 +19,7 @@ import { DetailWindowComponent } from './components/detailWindow/detail-window.c
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {Users} from './models/users';
 import {AuthGuardGuard} from './AuthGuard/auth-guard.guard';
+import {AuthenticationService} from "./Service/authentication.service";
 
 const appRoutes: Routes = [
   {
@@ -81,7 +82,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [PicturesService, DataserviceService, UploadImageComponent, Users],
+  providers: [PicturesService, DataserviceService, UploadImageComponent, Users, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
