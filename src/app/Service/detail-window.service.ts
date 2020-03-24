@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Post } from '../models/post';
+import {UsersService} from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class DetailWindowService {
 
 
   constructor(
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    public userService: UsersService
   ) {
     this.loadCommentsFromPicture();
   }
