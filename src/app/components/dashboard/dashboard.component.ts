@@ -44,9 +44,9 @@ export class DashboardComponent implements OnInit {
   }
 
   showDetails(picObject) {
-    this.detailWindowService.activePost = picObject;
+   // this.detailWindowService.activePost = picObject;
+    this.detailWindowService.setActivePostInLocalStorage(JSON.stringify(picObject));
     this.detailWindowService.loadCommentsFromPicture();
-    this.detailWindowService.setActivePostInLocalStorage(JSON.stringify(this.detailWindowService.activePost));
     this.router.navigateByUrl('/detailWindow');
   }
 /*

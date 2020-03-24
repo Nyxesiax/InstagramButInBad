@@ -29,7 +29,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   showDetails(postObject) {
-    this.detailWindow.activePost = postObject;
+   // this.detailWindow.activePost = postObject;
+    this.detailWindow.setActivePostInLocalStorage(JSON.stringify(postObject));
     this.detailWindow.loadCommentsFromPicture();
     this.router.navigateByUrl('/detailWindow');
   }
