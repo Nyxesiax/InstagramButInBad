@@ -1,6 +1,6 @@
 <body style="text-align: center">
 <div>
-    <h5 (click)="getUserOfPost(activePost)">{{activePost.owner}}</h5>
+    <h5 (click)="getUserOfPost(activePost)" style="cursor: pointer">{{activePost.owner}}</h5>
     <img [src]="activePost.picture.URL">
 
 <h5>Likes: {{activePost.picture.likes}}</h5>
