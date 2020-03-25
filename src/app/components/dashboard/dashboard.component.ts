@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
   } */
 
   getUserOfPost(postOwner: Post) {
+    this.detailWindowService.setActivePostInLocalStorage(JSON.stringify(postOwner));
     this.userService.ownerOfPost = postOwner.owner;
     console.log('Post owner:' + this.userService.ownerOfPost);
     this.router.navigateByUrl('/userProfile');
