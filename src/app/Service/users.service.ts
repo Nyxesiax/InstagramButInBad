@@ -4,7 +4,6 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {Users} from '../models/users';
 import {Post} from '../models/post';
-import {AngularFireAuth} from '@angular/fire/auth';
 import {User} from '../modules/user';
 
 
@@ -18,7 +17,7 @@ export class UsersService {
   postData: Post;
   userDataThree: User;
 
-  constructor(private af: AngularFirestore, public angularFireAuth: AngularFireAuth, public router: Router, public user: Users) {
+  constructor(private af: AngularFirestore, public router: Router, public user: Users) {
     if (localStorage.getItem('post')) {
       this.postData = JSON.parse(localStorage.getItem('post'));
       //  this.ownerOfPost = JSON.parse(JSON.stringify(this.postData));
@@ -26,9 +25,9 @@ export class UsersService {
       console.log('Owner of post: ' + JSON.stringify(this.ownerOfPost));
     }
     if (localStorage.getItem('user')) {
-      console.log('Bla');
       this.userDataThree = JSON.parse(localStorage.getItem('user'));
       this.user.email = JSON.parse(JSON.stringify(this.userDataThree.email));
+      this.ownerOfPost = JSON.parse(JSON.stringify(this.userDataThree.email));
     }
   }
 /*
@@ -39,7 +38,6 @@ export class UsersService {
   async save(email: string, password: string, username: string): Promise<boolean> {
     try {
       const ref = this.af.collection('Users').ref;
-
 
       ref.where('email', '==', email).get().then(d => {
         alert(JSON.stringify(d));
