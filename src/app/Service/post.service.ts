@@ -1,10 +1,12 @@
-
 import {Pictures} from '../models/pictures';
 import {PicComment} from '../models/pic.comment';
 import {Post} from '../models/post';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
+import {Users} from '../models/users';
+import Timestamp = firebase.firestore.Timestamp;
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +15,18 @@ import {Injectable} from '@angular/core';
 export class PostService {
 
   constructor(
-    public af: AngularFirestore
+    public af: AngularFirestore,
+    public user: Users
   ) {
     this.posts = this.af.collection('posts').valueChanges({ idField: 'id' }) as any as Observable<Post[]>;
   }
   public posts: Observable<Post[]>;
 
 
-  createPost(id: string, url: string, description: string, likes: number, owner: string) {
-    const pic = new Pictures(id, url, description, likes, Date.now().toString());
-    const p = new Post(owner , pic, []);
+  createPost(id: string, url: string, description: string, likes: number, tags: string, timestamp: Date) {
+    console.log(Date.now().toString());
+    const pic = new Pictures(id, url, description, likes, tags, /*Date.now().toString() */ timestamp.toString());
+    const p = new Post(this.user.email , pic, []);
     this.af.collection('posts').add(JSON.parse(JSON.stringify(p)));
   }
 
