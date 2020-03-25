@@ -26,6 +26,7 @@ export class UsersService {
       console.log('Owner of post: ' + JSON.stringify(this.ownerOfPost));
     }
     if (localStorage.getItem('user')) {
+      console.log('Bla');
       this.userDataThree = JSON.parse(localStorage.getItem('user'));
       this.user.email = JSON.parse(JSON.stringify(this.userDataThree.email));
     }
