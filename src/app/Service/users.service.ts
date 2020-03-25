@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {Users} from '../models/users';
 import {Post} from '../models/post';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {User} from '../modules/user';
 
 
 @Injectable({
@@ -14,13 +15,20 @@ import {AngularFireAuth} from '@angular/fire/auth';
 export class UsersService {
   posts: Observable<Post[]>;
   ownerOfPost: string;
-  postData: string;
+  postData: Post;
+  userDataThree: User;
 
   constructor(private af: AngularFirestore, public angularFireAuth: AngularFireAuth, public router: Router, public user: Users) {
-    this.postData = JSON.parse(localStorage.getItem('post'));
-    this.ownerOfPost = JSON.parse(JSON.stringify(this.postData));
-    this.ownerOfPost = JSON.parse(JSON.stringify(this.postData.owner));
-    console.log('Owner of post: ' + JSON.stringify(this.ownerOfPost));
+    if (localStorage.getItem('post')) {
+      this.postData = JSON.parse(localStorage.getItem('post'));
+      //  this.ownerOfPost = JSON.parse(JSON.stringify(this.postData));
+      this.ownerOfPost = JSON.parse(JSON.stringify(this.postData.owner));
+      console.log('Owner of post: ' + JSON.stringify(this.ownerOfPost));
+    }
+    if (localStorage.getItem('user')) {
+      this.userDataThree = JSON.parse(localStorage.getItem('user'));
+      this.user.email = JSON.parse(JSON.stringify(this.userDataThree.email));
+    }
   }
 /*
   del(user: Users) {

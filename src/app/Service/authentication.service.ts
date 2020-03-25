@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {DetailWindowService} from './detail-window.service';
+import {User} from '../modules/user';
 
 @Injectable({
   providedIn: 'root'
@@ -25,14 +25,12 @@ export class AuthenticationService {
         this.userDataThree = JSON.parse(localStorage.getItem('user'));
         this.userbla.email = JSON.parse(JSON.stringify(this.userDataThree.email));
       } else {
-        localStorage.setItem('user', null);
-        localStorage.setItem('activePost', null);
-        JSON.parse(localStorage.getItem('user'));
+        localStorage.clear();
       }
     });
   }
 
-  userDataThree: string;
+  userDataThree: User;
   userDataTwo: any;
   userData: Observable<firebase.User>;
  /*
@@ -125,16 +123,15 @@ export class AuthenticationService {
     return new Promise((resolve, reject) => {
       if (firebase.auth().currentUser) {
         this.angularFireAuth.auth.signOut();
-        localStorage.setItem('user', null);
-        localStorage.setItem('post', null);
+        localStorage.clear();
         this.router.navigateByUrl('');
         resolve();
       } else {
         try {
           return this.angularFireAuth.auth.signOut().then(() => {
-            localStorage.removeItem('user');
-            localStorage.removeItem('post');
-            this.router.navigateByUrl('login');
+           // localStorage.removeItem('user');
+          //  localStorage.removeItem('post');
+            localStorage.clear();
           });
         } catch (e) {
           reject();
