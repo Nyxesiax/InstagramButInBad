@@ -6,6 +6,7 @@ import {Users} from '../models/users';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+import {timestamp} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class PicturesService {
       tags: uI.tags, URL: uI.url, description: uI.description, likes: uI.likes, timestamp: uI.timestamp
     })
       .then(docRef => {
-        this.postService.createPost(docRef.id, uI.url, uI.description, uI.likes, uI.tags);
+        this.postService.createPost(docRef.id, uI.url, uI.description, uI.likes, uI.tags, uI.timestamp);
         console.log('Document written with ID: ', docRef.id);
       });
   }
