@@ -60,6 +60,7 @@ export class AuthenticationService {
       })
       .catch(error => {
         console.log('Something is wrong:', error.message);
+        localStorage.clear();
       });
   }
 
@@ -92,6 +93,7 @@ export class AuthenticationService {
           resolve(res);
         }, err => {
           console.log(err);
+          localStorage.clear();
           reject(err);
         });
     });
@@ -116,7 +118,7 @@ export class AuthenticationService {
         .then(res => {
           this.userbla.email = res.user.email;
           resolve(res);
-        }, err => reject(err));
+        }, err => reject(err)), localStorage.clear();
     });
   }
 
@@ -135,6 +137,7 @@ export class AuthenticationService {
             localStorage.clear();
           });
         } catch (e) {
+          localStorage.clear();
           reject();
         }
       }
@@ -154,6 +157,7 @@ export class AuthenticationService {
         this.userbla.email = result.user.email;
         this.router.navigateByUrl('/dashboard');
       }).catch((error) => {
+        localStorage.clear();
         console.log(error);
       });
   }
