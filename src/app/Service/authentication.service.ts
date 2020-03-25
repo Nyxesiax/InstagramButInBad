@@ -77,6 +77,7 @@ export class AuthenticationService {
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
+        localStorage.clear();
       });
   }
 
