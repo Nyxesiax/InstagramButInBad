@@ -6,6 +6,7 @@ import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {User} from '../modules/user';
+import {Pictures} from '../models/pictures';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +25,14 @@ export class AuthenticationService {
         localStorage.setItem('user', JSON.stringify(this.userDataTwo));
         this.userDataThree = JSON.parse(localStorage.getItem('user'));
         this.userbla.email = JSON.parse(JSON.stringify(this.userDataThree.email));
+        this.userbla.userProfile = JSON.parse(JSON.stringify(this.userDataThree.photoURL));
       } else {
         localStorage.clear();
       }
     });
   }
 
-  userDataThree: User;
+  userDataThree: firebase.User;
   userDataTwo: any;
   userData: Observable<firebase.User>;
  /*
@@ -155,6 +157,7 @@ export class AuthenticationService {
       .then((result) => {
         console.log('You have been successfully logged in!' + JSON.stringify(result));
         this.userbla.email = result.user.email;
+        this.userbla.userProfile = result.user.photoURL;
         this.router.navigateByUrl('/dashboard');
       }).catch((error) => {
         localStorage.clear();
@@ -168,5 +171,13 @@ export class AuthenticationService {
     } else {
       return false;
     }
+  }
+
+  // Test
+  uploadProfilePicture(picture: Pictures) {
+    firebase.auth().currentUser.updateProfile({
+        photoURL: picture.URL
+      }
+    );
   }
 }

@@ -15,8 +15,7 @@ export class DetailWindowService {
 
 
   constructor(
-    public afs: AngularFirestore,
-    public userService: UsersService
+    public afs: AngularFirestore
   ) {
     this.loadCommentsFromPicture();
   }

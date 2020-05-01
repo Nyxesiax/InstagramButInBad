@@ -64,8 +64,8 @@ export class PicturesService {
     });
   }
 
-  async showSinglePicture(pic: Pictures) {
-    const picture = this.af.collection('posts').doc(pic.id);
-    // this.singlePicArray = picture as Observable<Pictures[]>;
+  // Test
+  download(post: Post) {
+    // return post.picture.URL;
   }
 }
