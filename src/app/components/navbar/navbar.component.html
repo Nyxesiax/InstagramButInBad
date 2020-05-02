@@ -26,6 +26,9 @@
         <li class="nav-item active">
           <a class="nav-link" routerLink="/userProfile" routerLinkActive="active" (click)="getUserOfPost()">{{user.email}}</a>
         </li>
+        <li *ngIf="user.userProfile" class="nav-item active">
+          <img [src]="user.userProfile" height="40px" width="40px">
+        </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <label>
