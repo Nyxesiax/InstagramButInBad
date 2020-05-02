@@ -1,9 +1,9 @@
 <body style="text-align: center">
 <div>
-    <h5 (click)="getUserOfPost(activePost)" style="cursor: pointer">{{activePost.owner}}</h5>
+    <h1 (click)="getUserOfPost(activePost)" style="cursor: pointer">{{activePost.owner}}</h1>
     <img [src]="activePost.picture.URL">
-
-<h5>Likes: {{activePost.picture.likes}}</h5>
+<h1>{{activePost.picture.tags}}</h1>
+<h3>Likes: {{activePost.picture.likes}}</h3>
   </div>
 
 <table class="table table-responsive table-hover">
