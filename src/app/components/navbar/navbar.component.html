@@ -26,7 +26,7 @@
         <li class="nav-item active">
           <a class="nav-link" routerLink="/userProfile" routerLinkActive="active" (click)="getUserOfPost()">{{user.email}}</a>
         </li>
-        <li class="nav-item active">
+        <li *ngIf="user.userProfile" class="nav-item active">
           <img [src]="user.userProfile" height="40px" width="40px">
         </li>
       </ul>
