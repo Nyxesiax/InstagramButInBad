@@ -13,9 +13,12 @@
     <th>Kommentar</th>
   </thead>
   <tbody>
-    <tr *ngFor="let c of activePost.comments">
+    <tr *ngFor="let c of activePost.comments let i = index">
       <td>{{ c.author }}</td>
       <td>{{ c.text }}</td>
+     <!-- <td><img class="cursor" (click)="likesUp(activePost, i)" src="../../../assets/upvote.png" height="40px" width="40px"/></td>
+      <td (click)="test(i)">{{c.likes}}</td>
+      <td><img class="cursor"  (click)="likesDown(activePost, i)" src="../../../assets/downvote.png" height="40px" width="40px"/></td> -->
     </tr>
   </tbody>
   <tfoot>
