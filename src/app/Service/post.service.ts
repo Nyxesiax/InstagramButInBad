@@ -21,7 +21,6 @@ export class PostService {
   }
   public posts: Observable<Post[]>;
 
-
   createPost(id: string, url: string, description: string, likes: number, tags: string, timestamp: Date) {
     console.log(Date.now().toString());
     const pic = new Pictures(id, url, description, likes, tags, /*Date.now().toString() */ timestamp.toString());
@@ -34,8 +33,16 @@ export class PostService {
     this.af.collection('posts').doc(post.id
        ).update({
         comments: JSON.parse(JSON.stringify(post.comments)),
-        picture: JSON.parse(JSON.stringify(post.picture))
+        picture: JSON.parse(JSON.stringify(post.picture)),
       }
     );
    }
+
+   // Geht nicht wegen Firebse
+  /*
+  async updateCommentLikes(post: Post, index: number) {
+    this.af.collection('posts').doc(post.id).update({
+      'comments[index].likes': post.comments[index].likes
+    });
+  } */
 }

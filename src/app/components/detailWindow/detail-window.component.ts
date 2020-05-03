@@ -47,4 +47,18 @@ export class DetailWindowComponent implements OnInit {
     console.log('Post owner:' + this.userService.ownerOfPost);
     this.router.navigateByUrl('/userProfile');
   }
+  /*
+  async likesUp(post: Post, index: number) {
+    post.comments[index].likes++;
+    await this.postService.updateCommentLikes(post, index);
+  }
+
+  async likesDown(post: Post, index: number) {
+    post.comments[index].likes--;
+    await this.postService.updateCommentLikes(post, index);
+  }
+
+  test(index: number) {
+    alert(index);
+  } */
 }
