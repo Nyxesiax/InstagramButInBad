@@ -4,6 +4,7 @@
     <img [src]="activePost.picture.URL">
 <h1>{{activePost.picture.tags}}</h1>
 <h3>Likes: {{activePost.picture.likes}}</h3>
+    <a class="btn btn-outline-success" [download]="'instagramButInBad' + activePost.picture.description" [href]="activePost.picture.URL">Download</a>
   </div>
 
 <table class="table table-responsive table-hover">
