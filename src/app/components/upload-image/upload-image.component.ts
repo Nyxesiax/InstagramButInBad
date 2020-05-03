@@ -3,6 +3,7 @@ import { PicturesService } from 'src/app/Service/pictures.service';
 import { UploadImage } from 'src/app/models/upload-image';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../../Service/authentication.service';
 
 @Component({
   selector: 'app-upload-image',
@@ -22,6 +23,7 @@ export class UploadImageComponent implements OnInit {
     public pictureservice: PicturesService,
     private route: ActivatedRoute,
     private router: Router,
+    public authservice: AuthenticationService
   ) { }
 
 
@@ -80,4 +82,11 @@ export class UploadImageComponent implements OnInit {
 
   }
 
+  uploadProfilePicture() {
+    const img = new UploadImage();
+
+    img.url = this.base64textString;
+
+    this.authservice.uploadProfilePicture(img);
+  }
 }

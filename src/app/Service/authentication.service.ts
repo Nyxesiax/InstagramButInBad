@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {User} from '../modules/user';
 import {Pictures} from '../models/pictures';
+import {UploadImage} from "../models/upload-image";
 
 @Injectable({
   providedIn: 'root'
@@ -174,9 +175,9 @@ export class AuthenticationService {
   }
 
   // Test
-  uploadProfilePicture(picture: Pictures) {
+  uploadProfilePicture(image: UploadImage) {
     firebase.auth().currentUser.updateProfile({
-        photoURL: picture.URL
+        photoURL: image.url
       }
     );
   }
