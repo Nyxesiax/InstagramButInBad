@@ -29,7 +29,7 @@ export class PostService {
   }
 
   manageComments(post: Post, user: string, text: string) {
-    post.comments.push(new PicComment(user, text));
+    post.comments.push(new PicComment(user, text, 0));
     this.af.collection('posts').doc(post.id
        ).update({
         comments: JSON.parse(JSON.stringify(post.comments)),
@@ -38,11 +38,9 @@ export class PostService {
     );
    }
 
-   // Geht nicht wegen Firebse
-  /*
-  async updateCommentLikes(post: Post, index: number) {
+  async updateCommentLikes(post: Post) {
     this.af.collection('posts').doc(post.id).update({
-      'comments[index].likes': post.comments[index].likes
+      comments: JSON.parse(JSON.stringify(post.comments))
     });
-  } */
+  }
 }
