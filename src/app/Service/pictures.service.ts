@@ -6,7 +6,8 @@ import {Users} from '../models/users';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {timestamp} from "rxjs/operators";
+import {AngularFireStorage} from '@angular/fire/storage';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class PicturesService {
   private picArray: Observable<Post[]>;
   private singlePicArray: Observable<Pictures[]>;
 
-  constructor(private af: AngularFirestore, public postService: PostService, public user: Users) {
+  constructor(private af: AngularFirestore, public postService: PostService, public user: Users, private storage: AngularFireStorage) {
     // Bilder aus Firebase laden, nach timestamp DESC sortieren und in picArray speichern
     const pics = this.af.collection('posts', ref => {
       return ref.orderBy('picture.timestamp', 'desc');
@@ -64,8 +65,11 @@ export class PicturesService {
     });
   }
 
-  // Test
-  download(post: Post) {
-    // return post.picture.URL;
+  uploadImageToStorage(file) {
+    return new Promise((resolve, reject) => {
+      const storageRef = firebase.storage().ref('Profilbilder/' + file.name);
+      storageRef.put(file);
+      resolve();
+    });
   }
 }

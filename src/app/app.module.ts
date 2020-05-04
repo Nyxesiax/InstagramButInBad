@@ -20,6 +20,7 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
 import {Users} from './models/users';
 import {AuthGuardGuard} from './AuthGuard/auth-guard.guard';
 import {AuthenticationService} from './Service/authentication.service';
+import {AngularFireStorage} from "@angular/fire/storage";
 
 const appRoutes: Routes = [
   {
@@ -82,7 +83,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [PicturesService, DataserviceService, UploadImageComponent, Users, AuthenticationService],
+  providers: [PicturesService, DataserviceService, UploadImageComponent, Users, AuthenticationService, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule {
