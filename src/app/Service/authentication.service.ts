@@ -5,9 +5,6 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {User} from '../modules/user';
-import {Pictures} from '../models/pictures';
-import {UploadImage} from "../models/upload-image";
 
 @Injectable({
   providedIn: 'root'
@@ -119,6 +116,7 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
         .then(res => {
+          console.log('You are: ' + JSON.stringify(res));
           this.userbla.email = res.user.email;
           resolve(res);
         }, err => reject(err)), localStorage.clear();
@@ -174,11 +172,25 @@ export class AuthenticationService {
     }
   }
 
-  // Test
-  uploadProfilePicture(image: UploadImage) {
+  // Success!
+  uploadProfilePicture(file) {
+    // Create a reference with an initial file path and name
+    let photoURL = null;
+    const storage = firebase.storage();
+    const pathReference = storage.ref('Profilbilder/' + file.name);
+    pathReference.getDownloadURL().then((url) => {
+      photoURL = url;
+      console.log('Test: ' + photoURL);
+      firebase.auth().currentUser.updateProfile({
+          photoURL: photoURL.toString()
+        }
+      );
+    });
+  }
+
+  reset() {
     firebase.auth().currentUser.updateProfile({
-        photoURL: image.url
-      }
-    );
+      photoURL: null
+    });
   }
 }

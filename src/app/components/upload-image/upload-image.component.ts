@@ -26,7 +26,7 @@ export class UploadImageComponent implements OnInit {
     public authservice: AuthenticationService
   ) { }
 
-
+  private fileForProfile;
 
   ngOnInit() {
   }
@@ -34,17 +34,17 @@ export class UploadImageComponent implements OnInit {
   fileSelect(event) {
     const files = event.target.files;
     const file = files[0];
-
+    this.fileForProfile = file;
     if (files && file) {
       const reader = new FileReader();
+
       reader.readAsDataURL(file);
       reader.onload = (() => {
-        console.log('IMAGE: ' + reader.result);
+      //  console.log('IMAGE: ' + reader.result);
         this.base64textString = reader.result.toString();
       });
       // reader.onload = this._convertFileToBase64.bind(this);
       // reader.readAsBinaryString(file);
-
     }
   }
 
@@ -83,10 +83,11 @@ export class UploadImageComponent implements OnInit {
   }
 
   uploadProfilePicture() {
-    const img = new UploadImage();
+    this.pictureservice.uploadImageToStorage(this.fileForProfile).then(() => this.authservice.uploadProfilePicture(this.fileForProfile));
+  }
 
-    img.url = this.base64textString;
-
-    this.authservice.uploadProfilePicture(img);
+  // Set profile pic to null, for test purposes only
+  reset() {
+    this.authservice.reset();
   }
 }
