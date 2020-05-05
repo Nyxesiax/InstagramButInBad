@@ -5,7 +5,7 @@ import {PostService} from './post.service';
 import {Users} from '../models/users';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {observable, Observable} from 'rxjs';
 import {AngularFireStorage} from '@angular/fire/storage';
 import * as firebase from 'firebase';
 
@@ -62,14 +62,6 @@ export class PicturesService {
     this.af.collection('posts').doc(pic.id).update({
       'picture.URL': pic.picture.URL,
       'picture.likes': pic.picture.likes
-    });
-  }
-
-  uploadImageToStorage(file) {
-    return new Promise((resolve, reject) => {
-      const storageRef = firebase.storage().ref('Profilbilder/' + file.name);
-      storageRef.put(file);
-      resolve();
     });
   }
 }

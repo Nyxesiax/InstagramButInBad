@@ -5,6 +5,7 @@ import {Post} from '../../models/post';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UsersService} from '../../Service/users.service';
+import * as firebase from 'firebase';
 
 
 @Component({
