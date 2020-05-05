@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {Users} from '../models/users';
 import {Post} from '../models/post';
 import {User} from '../modules/user';
+import * as firebase from "firebase";
 
 
 @Injectable({

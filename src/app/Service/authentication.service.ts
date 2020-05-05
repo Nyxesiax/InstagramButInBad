@@ -173,18 +173,20 @@ export class AuthenticationService {
   }
 
   // Success!
-  uploadProfilePicture(file) {
-    // Create a reference with an initial file path and name
+  uploadImageToStorage(file) {
     let photoURL = null;
-    const storage = firebase.storage();
-    const pathReference = storage.ref('Profilbilder/' + file.name);
-    pathReference.getDownloadURL().then((url) => {
-      photoURL = url;
-      console.log('Test: ' + photoURL);
-      firebase.auth().currentUser.updateProfile({
-          photoURL: photoURL.toString()
-        }
-      );
+    return new Promise((resolve, reject) => {
+      const storageRef = firebase.storage().ref('Profilbilder/' + firebase.auth().currentUser.uid + '/' + file.name);
+      storageRef.put(file).then(() => {
+        storageRef.getDownloadURL().then((url) => {
+          photoURL = url;
+          firebase.auth().currentUser.updateProfile({
+              photoURL: photoURL.toString()
+            }
+          );
+        });
+      });
+      resolve();
     });
   }
 

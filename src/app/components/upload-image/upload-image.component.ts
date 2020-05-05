@@ -24,7 +24,8 @@ export class UploadImageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public authservice: AuthenticationService
-  ) { }
+  ) {
+  }
 
   private fileForProfile;
 
@@ -83,7 +84,7 @@ export class UploadImageComponent implements OnInit {
   }
 
   uploadProfilePicture() {
-    this.pictureservice.uploadImageToStorage(this.fileForProfile).then(() => this.authservice.uploadProfilePicture(this.fileForProfile));
+   this.authservice.uploadImageToStorage(this.fileForProfile);
   }
 
   // Set profile pic to null, for test purposes only
