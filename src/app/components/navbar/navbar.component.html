@@ -30,18 +30,18 @@
           <img [src]="user.userProfile" height="40px" width="40px">
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm">
         <label>
-          <input (keydown)="search($event)" [(ngModel)]="searchterm" type="text">
+          <input type="text" class="form-control" formControlName="searchterm">
         </label>
-        <ul *ngFor="let username of usernames">
-          <li>{{username.username}}</li>
+      <!--  <ul *ngFor="let searchedUser of users">
+          <li>{{searchedUser.email}}</li>
         </ul>
         <div *ngIf="username?.length < 1">
-          <!-- <p>Sorry, no user found</p> -->
-        </div>
+           <p>Sorry, no user found</p>
+        </div> -->
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-        <button type="button" class="btn btn-light">Search</button>
+        <button type="button" class="btn btn-light" (click)="search(searchForm.value)">Search</button>
       </form>
 
     </div>

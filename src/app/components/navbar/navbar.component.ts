@@ -3,6 +3,7 @@ import {AuthenticationService} from '../../Service/authentication.service';
 import {Users} from '../../models/users';
 import {UsersService} from '../../Service/users.service';
 import {Router} from '@angular/router';
+import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -11,8 +12,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
- /* searchterm: string;
+  searchterm: string;
+  searchForm: FormGroup;
 
+  /*
   startAt = new Subject();
   endAt = new Subject();
 
@@ -29,7 +32,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isAuthenticated() {
-    console.log(this.authService.isAuthenticated());
+    // console.log(this.authService.isAuthenticated());
     return this.authService.isAuthenticated();
   }
 
@@ -39,5 +42,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  search(searchterm) {
+    console.log(this.searchterm);
+    return this.userService.searchUser(searchterm);
   }
 }
