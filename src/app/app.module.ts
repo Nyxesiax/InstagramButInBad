@@ -23,6 +23,7 @@ import {AuthenticationService} from './Service/authentication.service';
 import {AngularFireStorage} from "@angular/fire/storage";
 import { FavoritesComponent } from './components/favorites/favorites.component';
 
+
 const appRoutes: Routes = [
   {
     path: 'startScreen',

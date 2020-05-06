@@ -3,7 +3,6 @@ import {AuthenticationService} from '../../Service/authentication.service';
 import {Users} from '../../models/users';
 import {UsersService} from '../../Service/users.service';
 import {Router} from '@angular/router';
-import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -12,7 +11,8 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
- searchterm: string;
+  searchterm: string;
+/*
 
   startAt = new Subject();
   endAt = new Subject();
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   startobs = this.startAt.asObservable();
   endobs = this.endAt.asObservable(); */
   constructor(public authService: AuthenticationService, public user: Users, public userService: UsersService, public router: Router) {
-    this.searchterm = '';
+    this.searchterm = 'hallo@test.de';
   }
 
   signOut() {
@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
 
   getUserOfPost() {
     this.userService.ownerOfPost = this.user.email;
-    //this.router.navigateByUrl('/userProfile');
+    // this.router.navigateByUrl('/userProfile');
   }
 
   ngOnInit() {
@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
   search() {
     console.log(this.searchterm);
     this.userService.ownerOfPost = this.searchterm;
-    this.searchterm = '';
+    // this.searchterm = '';
     this.router.navigateByUrl('/userProfile');
   }
 }
