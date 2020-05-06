@@ -1,15 +1,14 @@
-img{
-  width: 1024px;
-  height: 768px;
+img {
+ /* width:18rem;
+  height: 250px; */
+  width: 100%;
 }
 
-li{
-  padding-bottom: 175px !important;
-  margin-left:448px;
-  margin-right:448px;
-}
 
 button {
   margin-left: 0.5%;
   margin-top: 0.5%;
+}
+
+div.post {
 }

@@ -3,12 +3,8 @@ form {
   display: table;
 }
 
-.googleButton {
-  height: 100px;
-  width: 100px;
-  background-image: image('https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-icon-google-website-search-engine-information-company-logo-17.png');
-}
-
+ /*
 div img:hover {
   cursor: pointer;
 }
+ */

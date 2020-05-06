@@ -2,9 +2,13 @@
   <!-- <div id="uploadzone" class="file-upload-wrapper">
     <input type="file" id="input-file-now" class="file-upload" />
     </div> -->
-  <div id="uploadzone">
+
+  <div *ngIf="!base64textString" id="uploadzone">
     <label for="filePicker">Choose or drag a file:</label><br>
     <input type="file" id="filePicker" (change)="fileSelect($event)">
+  </div>
+  <div *ngIf="base64textString">
+    <img [src]="base64textString">
   </div>
   <div class="form-group">
     <label>Beschreibung</label>
@@ -18,6 +22,8 @@
 
   </div>
   <div>
-    <button type="button" class="btn btn-secondary" (click)="upload()">Hochladen</button>
+    <button type="button" class="btn btn-secondary" (click)="upload()">Posten</button>
+    <button type="button" class="btn btn-secondary" (click)="uploadProfilePicture()">Als Profilbild verwenden</button>
+    <button type="button" class="btn btn-danger" (click)="reset()">Profilbild löschen</button>
   </div>
 </form>

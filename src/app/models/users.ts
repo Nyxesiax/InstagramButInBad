@@ -2,5 +2,5 @@ export class Users {
   id: string;
   email: string;
   password: string;
-  username: string;
+  userProfile?: string;
 }

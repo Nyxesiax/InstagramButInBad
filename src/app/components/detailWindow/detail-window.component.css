@@ -1,0 +1,11 @@
+body {
+  text-align: center;
+}
+ input {
+   width: 600px;
+ }
+
+ .cursor {
+   cursor: pointer;
+ }
+
