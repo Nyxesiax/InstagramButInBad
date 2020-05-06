@@ -21,11 +21,17 @@ import {Users} from './models/users';
 import {AuthGuardGuard} from './AuthGuard/auth-guard.guard';
 import {AuthenticationService} from './Service/authentication.service';
 import {AngularFireStorage} from "@angular/fire/storage";
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 const appRoutes: Routes = [
   {
     path: 'startScreen',
     component: StartScreenComponent
+  },
+  {
+    path: 'favorites',
+    component: FavoritesComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'uploadImage',
@@ -66,7 +72,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     UploadImageComponent,
     DetailWindowComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    FavoritesComponent
   ],
   imports: [
    // RouterModule.forChild(
