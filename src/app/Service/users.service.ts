@@ -17,6 +17,7 @@ export class UsersService {
   ownerOfPost: string;
   postData: Post;
   userDataThree: User;
+  favorites: Observable<Users[]>;
 
   constructor(private af: AngularFirestore, public router: Router, public user: Users) {
     if (localStorage.getItem('post')) {
@@ -72,6 +73,14 @@ export class UsersService {
       }).valueChanges({ idField: 'id' });
       this.posts = postOfOwner as any as Observable<Post[]>;
     }
+  }
+
+  loadFavorites() {
+    const favoritesOfUser = this.af.collection('favorites', ref => {
+      return ref.where('owner', '==', 'test@gmail.com');
+    });
+    console.log(favoritesOfUser.get);
+    return favoritesOfUser;
   }
 /*
   async switchToUserProfile() {
