@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {Users} from '../models/users';
 import {Post} from '../models/post';
 import {User} from '../modules/user';
-import * as firebase from "firebase";
 
 
 @Injectable({
@@ -31,6 +30,14 @@ export class UsersService {
       this.user.email = JSON.parse(JSON.stringify(this.userDataThree.email));
       this.ownerOfPost = JSON.parse(JSON.stringify(this.userDataThree.email));
     }
+  }
+
+  searchUser(searchTerm: string) {
+    const ref = this.af.collection('users').ref.where('email', '==', searchTerm).get().then(snapshot => {
+        snapshot.forEach(doc => {
+          console.log(doc.id, '=>', doc.data());
+        });
+      });
   }
 /*
   del(user: Users) {

@@ -33,7 +33,7 @@
           <img [src]="user.userProfile" height="40px" width="40px">
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm">
         <label>
           <input [(ngModel)]="searchterm" >
         </label>
