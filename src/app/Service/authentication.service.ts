@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 export class AuthenticationService {
 
   // tslint:disable-next-line:max-line-length
-  constructor(public angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users) {
+  constructor(public angularFireAuth: AngularFireAuth, public router: Router, public userbla: Users, public db: AngularFirestore) {
     this.userData = angularFireAuth.authState;
 
     /* Saving user data as an object in localstorage if logged out than set to null */
@@ -105,7 +106,11 @@ export class AuthenticationService {
 
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
         .then(res => {
-          resolve(res);
+          return this.db.collection('users').doc(res.user.uid).set({
+            email: value.email
+          }).then(() => {
+            resolve(res);
+          });
         }, err => reject(err));
     });
   }
