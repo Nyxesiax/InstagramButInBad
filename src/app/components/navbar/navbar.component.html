@@ -32,15 +32,12 @@
         <li *ngIf="user.userProfile" class="nav-item active">
           <img [src]="user.userProfile" height="40px" width="40px">
         </li>
-        <li *ngIf="user.userProfile" class="nav-item active">
-          <img [src]="user.userProfile" height="40px" width="40px">
-        </li>
       </ul>
       <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm">
         <label>
-          <input [(ngModel)]="searchterm" type="text">
+          <input [(ngModel)]="searchterm" >
         </label>
-
+        <label>test{{searchterm}}</label>
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
         <button type="button" class="btn btn-light" (click)="search()">Search</button>
       </form>
