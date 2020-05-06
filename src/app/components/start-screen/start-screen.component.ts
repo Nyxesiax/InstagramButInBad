@@ -1,9 +1,7 @@
-
+import { AuthenticationService } from '../../Service/authentication.service';
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../../Service/authentication.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-start-screen',
@@ -20,7 +18,6 @@ export class StartScreenComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    public authService: AuthenticationService,
     private router: Router,
     private fb: FormBuilder
 ) {
@@ -33,14 +30,6 @@ createForm() {
     password: ['', Validators.required]
   });
 }
-
-
-  signUp() {
-
-    this.authenticationService.SignUp(this.email, this.password);
-    this.email = '';
-    this.password = '';
-  }
 
   tryRegister(value) {
     this.authenticationService.doRegister(value)
@@ -57,7 +46,4 @@ createForm() {
 
   ngOnInit() {
   }
-
-
-
 }

@@ -1,24 +1,37 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import {HttpClient} from '@angular/common/http';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {auth} from 'firebase';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {Users} from '../models/users';
+import {Post} from '../models/post';
+import {User} from '../modules/user';
+import * as firebase from "firebase";
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UsersService {
-  users: Observable<any>;
+  posts: Observable<Post[]>;
+  ownerOfPost: string;
+  postData: Post;
+  userDataThree: User;
 
-  // tslint:disable-next-line:max-line-length
-  constructor(private httpClient: HttpClient, private af: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public userBla: Users) {
-    this.users = af.collection('Users').valueChanges({ idField: 'id' });
+  constructor(private af: AngularFirestore, public router: Router, public user: Users) {
+    if (localStorage.getItem('post')) {
+      this.postData = JSON.parse(localStorage.getItem('post'));
+      //  this.ownerOfPost = JSON.parse(JSON.stringify(this.postData));
+      this.ownerOfPost = JSON.parse(JSON.stringify(this.postData.owner));
+      console.log('Owner of post: ' + JSON.stringify(this.ownerOfPost));
+    }
+    if (localStorage.getItem('user')) {
+      this.userDataThree = JSON.parse(localStorage.getItem('user'));
+      this.user.email = JSON.parse(JSON.stringify(this.userDataThree.email));
+      this.ownerOfPost = JSON.parse(JSON.stringify(this.userDataThree.email));
+    }
   }
-
+/*
   del(user: Users) {
     this.af.collection('Users').doc(user.id).delete();
   }
@@ -26,7 +39,6 @@ export class UsersService {
   async save(email: string, password: string, username: string): Promise<boolean> {
     try {
       const ref = this.af.collection('Users').ref;
-
 
       ref.where('email', '==', email).get().then(d => {
         alert(JSON.stringify(d));
@@ -46,22 +58,27 @@ export class UsersService {
     } catch (e) {
         return false;
       }
+  } */
+  loadPostsOfLoggedinOwner() {
+    console.log('Postowner: ' + this.ownerOfPost);
+    if (this.ownerOfPost === this.user.email) {
+      const postOfOwner = this.af.collection('posts', ref => {
+        return ref.where('owner', '==', this.user.email);
+      }).valueChanges({ idField: 'id' });
+      this.posts = postOfOwner as any as Observable<Post[]>;
+    } else {
+      const postOfOwner = this.af.collection('posts', ref => {
+        return ref.where('owner', '==', this.ownerOfPost);
+      }).valueChanges({ idField: 'id' });
+      this.posts = postOfOwner as any as Observable<Post[]>;
+    }
   }
-
-  // Sign in with Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+/*
+  async switchToUserProfile() {
+   await this.router.navigateByUrl('/userProfile');
   }
-
-  // Auth logic to run auth providers
-  AuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then((result) => {
-        console.log('You have been successfully logged in!' + JSON.stringify(result));
-        this.userBla.email = result.user.email;
-        this.router.navigateByUrl('/dashboard');
-      }).catch((error) => {
-        console.log(error);
-      });
+ */
+  ownerPosts() {
+    return this.posts;
   }
 }

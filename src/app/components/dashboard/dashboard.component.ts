@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/Service/pictures.service';
-import {PostService} from '../../Service/post.service';
-import {Pictures} from '../../models/pictures';
-import {Router} from '@angular/router';
 import {Users} from '../../models/users';
-import {AuthenticationService} from '../../Service/authentication.service';
+import {DetailWindowService} from '../../Service/detail-window.service';
+import {Post} from '../../models/post';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {UsersService} from '../../Service/users.service';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -13,41 +14,51 @@ import {AuthenticationService} from '../../Service/authentication.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  // tslint:disable-next-line:max-line-length
-  constructor(private picturesService: PicturesService, public postService: PostService, public users: Users, public router: Router, public authentification: AuthenticationService) {
-    console.log(this.users.email);
+// tslint:disable-next-line:max-line-length
+  constructor(
+    public picturesService: PicturesService,
+    public users: Users,
+    public router: Router,
+    public detailWindowService: DetailWindowService,
+    public userService: UsersService
+  ) {
   }
-  public picComment: string;
   ngOnInit() {
   }
 
   // PicArray aus Service für HTML als fake property bereitstellen
-  get pictures() {
-    return this.picturesService.pictures();
+  get posts() {
+    return this.picturesService.posts();
   }
   async like() {
     await this.picturesService.like();
   }
 
-  async likesUp(pic: Pictures) {
-    pic.likes++;
-    await this.picturesService.updatePicture(pic);
+  async likesUp(post: Post) {
+    post.picture.likes++;
+    await this.picturesService.updatePicture(post);
   }
 
-  async likesDown(pic: Pictures) {
-    pic.likes--;
-    await this.picturesService.updatePicture(pic);
-  }
-  manageComment() {
-    this.postService.manageComments(this.users.email, this.picComment);
+  async likesDown(post: Post) {
+    post.picture.likes--;
+    await this.picturesService.updatePicture(post);
   }
 
-  showDetails() {
+  showDetails(picObject) {
+   // this.detailWindowService.activePost = picObject;
+    this.detailWindowService.setActivePostInLocalStorage(JSON.stringify(picObject));
+    this.detailWindowService.loadCommentsFromPicture();
     this.router.navigateByUrl('/detailWindow');
   }
+/*
+  switchToUserProfile() {
+    return this.userService.switchToUserProfile();
+  } */
 
-  signOut() {
-    return this.authentification.SignOut();
+  getUserOfPost(postOwner: Post) {
+    this.detailWindowService.setActivePostInLocalStorage(JSON.stringify(postOwner));
+    this.userService.ownerOfPost = postOwner.owner;
+    console.log('Post owner:' + this.userService.ownerOfPost);
+    this.router.navigateByUrl('/userProfile');
   }
 }

@@ -1,15 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-
 import {AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
 import { LoginComponent } from './components/loginWindow/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-
-
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PicturesService } from './Service/pictures.service';
@@ -17,9 +14,13 @@ import { DataserviceService } from './Service/dataservice.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import {AngularFireModule} from '@angular/fire';
+import { AngularFireModule } from '@angular/fire';
 import { DetailWindowComponent } from './components/detailWindow/detail-window.component';
-import {Users} from "./models/users";
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {Users} from './models/users';
+import {AuthGuardGuard} from './AuthGuard/auth-guard.guard';
+import {AuthenticationService} from './Service/authentication.service';
+import {AngularFireStorage} from "@angular/fire/storage";
 
 const appRoutes: Routes = [
   {
@@ -28,23 +29,32 @@ const appRoutes: Routes = [
   },
   {
     path: 'uploadImage',
-    component: UploadImageComponent
+    component: UploadImageComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'detailWindow',
-    component: DetailWindowComponent
+    component: DetailWindowComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
-  { path: '',
-    component: StartScreenComponent} // ,
-  // { path: '**', component: PageNotFoundComponent }
+  {
+    path: 'userProfile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: '',
+    component: StartScreenComponent
+  }
 ];
 
 @NgModule({
@@ -55,12 +65,15 @@ const appRoutes: Routes = [
     DashboardComponent,
     NavbarComponent,
     UploadImageComponent,
-    DetailWindowComponent
+    DetailWindowComponent,
+    UserProfileComponent
   ],
   imports: [
+   // RouterModule.forChild(
+    //  appRoutes),
     RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true}),
+      {enableTracing: false}),
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -70,7 +83,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [PicturesService, DataserviceService, UploadImageComponent, Users],
+  providers: [PicturesService, DataserviceService, UploadImageComponent, Users, AuthenticationService, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule {

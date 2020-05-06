@@ -1,3 +1,30 @@
-<li *ngFor="let pic of picture | async; let i = index">
-  <img [src]="pic.URL">
-</li>
+<body style="text-align: center">
+<div>
+    <h1 (click)="getUserOfPost(activePost)" style="cursor: pointer">{{activePost.owner}}</h1>
+    <img [src]="activePost.picture.URL">
+<h1>{{activePost.picture.tags}}</h1>
+<h3>Likes: {{activePost.picture.likes}}</h3>
+    <a class="btn btn-outline-success" [download]="'instagramButInBad' + activePost.picture.description" [href]="activePost.picture.URL">Download</a>
+  </div>
+
+<table class="table table-responsive table-hover">
+  <thead>
+    <th>Benutzer</th>
+    <th>Kommentar</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of activePost.comments let i = index">
+      <td>{{ c.author }}</td>
+      <td>{{ c.text }}</td>
+      <td><img class="cursor" (click)="likesUp(activePost, i)" src="../../../assets/upvote.png" height="40px" width="40px"/></td>
+      <td (click)="test(i)">{{c.likes}}</td>
+      <td><img class="cursor"  (click)="likesDown(activePost, i)" src="../../../assets/downvote.png" height="40px" width="40px"/></td>
+    </tr>
+  </tbody>
+  <tfoot>
+  <input type="text" class="form-control" id="comment" style="width: 60%; display: inline-block"
+         placeholder="Enter comment" [(ngModel)]="picComment" [ngModelOptions]="{standalone: true}">
+    <button (click)="manageComment()" class="btn btn-outline-success" style="display: inline-block;">comment</button>
+  </tfoot>
+</table>
+</body>
