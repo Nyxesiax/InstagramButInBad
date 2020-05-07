@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {FormsModule} from "@angular/forms";
 
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -14,6 +15,7 @@ import {FormsModule} from "@angular/forms";
 export class NavbarComponent implements OnInit {
   searchterm: string;
 /*
+
   startAt = new Subject();
   endAt = new Subject();
 
@@ -31,7 +33,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isAuthenticated() {
-    console.log(this.authService.isAuthenticated());
+    // console.log(this.authService.isAuthenticated());
     return this.authService.isAuthenticated();
   }
 

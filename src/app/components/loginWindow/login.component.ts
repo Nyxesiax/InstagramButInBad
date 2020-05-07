@@ -13,7 +13,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
   email: string;
-  password: string;
+   password: string;
 
   constructor(
     private authenticationService: AuthenticationService,
