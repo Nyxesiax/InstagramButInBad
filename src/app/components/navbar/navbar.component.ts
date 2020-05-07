@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   startobs = this.startAt.asObservable();
   endobs = this.endAt.asObservable(); */
   constructor(public authService: AuthenticationService, public user: Users, public userService: UsersService, public router: Router) {
-    this.searchterm = 'hallo@test.de';
+    this.searchterm = '';
   }
 
   signOut() {
@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
   search() {
     console.log(this.searchterm);
     this.userService.ownerOfPost = this.searchterm;
-    //this.searchterm = '';
+    this.searchterm = '';
     this.router.navigateByUrl('/userProfile');
   }
 }
